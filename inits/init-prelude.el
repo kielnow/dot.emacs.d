@@ -48,7 +48,7 @@
 ;;; -----------------------------------------------------------------------------
 ;;; Common Lisp Extensions
 ;;; -----------------------------------------------------------------------------
-(unless (require 'cl-lib nil 'noerror) (require 'cl))
+;(unless (require 'cl-lib nil 'noerror) (require 'cl))
 (require 'cl)
 
 ;;; -----------------------------------------------------------------------------
@@ -68,12 +68,12 @@
 ;;; -----------------------------------------------------------------------------
 (unless (fboundp 'byte-recompile-file)
   (defun byte-recompile-file (filename)
-	(when (file-newer-than-file-p filename (concat filename "c"))
-	  (byte-compile-file filename))))
+	(if (file-newer-than-file-p filename (concat filename "c"))
+		(byte-compile-file filename) t)))
 
 (defun my:byte-recompile-directory (dirname)
-  (when (file-directory-p dirname)
-	(byte-recompile-directory dirname 0)))
+  (if (file-directory-p dirname)
+	  (byte-recompile-directory dirname 0) t))
 
 (defun byte-recompile-init-files ()
   "Recompile all your init files."
@@ -81,7 +81,8 @@
   (byte-recompile-file user-init-file)
   (my:byte-recompile-directory my:init-dir)
   (my:byte-recompile-directory my:lisp-dir)
-  (my:byte-recompile-directory my:lispver-dir))
+  (my:byte-recompile-directory my:lispver-dir)
+  t)
 
 (unless my:user-emacs-editing-p
   (add-hook 'kill-emacs-query-functions 'byte-recompile-init-files))

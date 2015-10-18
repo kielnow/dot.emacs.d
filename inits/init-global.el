@@ -71,6 +71,33 @@
 			(define-key iswitchb-mode-map "\C-n" 'iswitchb-next-match)
 			(define-key iswitchb-mode-map "\C-p" 'iswitchb-prev-match)))
 
+;; カレントディレクトリ設定
+(cd "~")
+;; OS のクリップボードを使う
+(setq x-select-enable-clipboard t)
+;; ゴミ箱を使う
+(setq delete-by-moving-to-trash t)
+
+;; ロックファイルを作成しない
+(setq create-lockfiles nil)
+;; 変更があったファイルを自動再読み込み
+;;(global-auto-revert-mode 1)
+;; シンボリックリンクをたどる
+;(setq vc-follow-symlink t)
+
+;; スクリプト保存時に実行属性を付ける
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+;; .el ファイル保存時に .elc ファイルを削除する
+(defun my:remove-elc-on-save ()
+  "If you're saving an elisp file, likely the .elc is no longer valid."
+  (add-hook 'after-save-hook
+			(lambda ()
+			  (if (file-exists-p (concat buffer-file-name "c"))
+				  (delete-file (concat buffer-file-name "c"))))
+			nil t))
+(add-hook 'emacs-lisp-mode-hook 'my:remove-elc-on-save)
+
 ;;; -----------------------------------------------------------------------------
 ;;; 編集設定
 ;;; -----------------------------------------------------------------------------
@@ -103,31 +130,6 @@
 ;;(setq kill-whole-line t)
 ;; リージョン選択時に文字を入力するとリージョンを削除する
 ;;(delete-selection-mode t)
-
-;; OS のクリップボードを使う
-(setq x-select-enable-clipboard t)
-;; ゴミ箱を使う
-(setq delete-by-moving-to-trash t)
-
-;; ロックファイルを作成しない
-(setq create-lockfiles nil)
-;; 変更があったファイルを自動再読み込み
-;;(global-auto-revert-mode 1)
-;; シンボリックリンクをたどる
-;(setq vc-follow-symlink t)
-
-;; スクリプト保存時に実行属性を付ける
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-;; .el ファイル保存時に .elc ファイルを削除する
-(defun my:remove-elc-on-save ()
-  "If you're saving an elisp file, likely the .elc is no longer valid."
-  (add-hook 'after-save-hook
-			(lambda ()
-			  (if (file-exists-p (concat buffer-file-name "c"))
-				  (delete-file (concat buffer-file-name "c"))))
-			nil t))
-(add-hook 'emacs-lisp-mode-hook 'my:remove-elc-on-save)
 
 ;;; -----------------------------------------------------------------------------
 ;;; オートセーブ #foo.txt"

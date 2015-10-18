@@ -64,7 +64,8 @@
 (setq gc-cons-threshold (* 8 1024 1024))
 
 (when my:user-emacs-editing-p
-  (switch-to-buffer (get-buffer "*Messages*")))
+  (switch-to-buffer (get-buffer "*Messages*"))
+  (cd user-emacs-directory))
 
 ;;; -----------------------------------------------------------------------------
 ;;; End
