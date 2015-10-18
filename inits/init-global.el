@@ -12,7 +12,7 @@
 ;; メニューバーを消す
 (menu-bar-mode 0)
 ;; スクロールバーを消す
-;(scroll-bar-mode 0)
+;;(scroll-bar-mode 0)
 
 ;; 行番号をモードラインに表示
 (setq line-number-mode t)
@@ -21,7 +21,7 @@
 ;; ファイルサイズをモードラインに表示
 (setq size-indication-mode t)
 ;; 現在の関数名をモードラインに表示
-(which-function-mode 1)
+;;(which-function-mode 1)
 ;; 時間をモードラインに表示
 (setq display-time-string-forms '((format "%s/%s(%s)%s:%s" month day dayname 24-hours minutes)))
 (display-time)
@@ -35,8 +35,11 @@
 (setq show-paren-style 'mixed)
 
 ;; linum-mode
-;(global-linum-mode 1)
+(global-linum-mode 1)
 (setq linum-format "%5d ")
+
+;; hl-line-mode
+(global-hl-line-mode 1)
 
 ;;; -----------------------------------------------------------------------------
 ;;; 操作設定
@@ -89,17 +92,17 @@
 (add-hook 'before-save-hook 'my:delete-trailing-whitespace)
 
 ;; ファイル末尾に改行を入れる
-;(setq require-final-newline nil)
+;;(setq require-final-newline nil)
 ;; バッファ終端で改行しない
-;(setq next-line-add-newlines nil)
+;;(setq next-line-add-newlines nil)
 
 ;; 区切り文字に全角スペースや・を含める
 (setq paragraph-start '"^\\([ 　・○<\t\n\f]\\|(?[0-9a-zA-Z]+)\\)")
 
 ;; kill-line で改行も切り取る
-;(setq kill-whole-line t)
+;;(setq kill-whole-line t)
 ;; リージョン選択時に文字を入力するとリージョンを削除する
-;(delete-selection-mode t)
+;;(delete-selection-mode t)
 
 ;; OS のクリップボードを使う
 (setq x-select-enable-clipboard t)
@@ -109,7 +112,7 @@
 ;; ロックファイルを作成しない
 (setq create-lockfiles nil)
 ;; 変更があったファイルを自動再読み込み
-;(global-auto-revert-mode 1)
+;;(global-auto-revert-mode 1)
 ;; シンボリックリンクをたどる
 ;(setq vc-follow-symlink t)
 
@@ -119,7 +122,7 @@
 ;; .el ファイル保存時に .elc ファイルを削除する
 (defun my:remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
-  (add-hook 'after-save-hook 
+  (add-hook 'after-save-hook
 			(lambda ()
 			  (if (file-exists-p (concat buffer-file-name "c"))
 				  (delete-file (concat buffer-file-name "c"))))
@@ -132,10 +135,11 @@
 ;;; 復元方法 M-x recover-file RET ファイル名 RET
 ;;; -----------------------------------------------------------------------------
 ;; オートセーブしない
-;(setq auto-save-default nil)
+;;(setq auto-save-default nil)
 ;; オートセーブファイルの保存先
-(setq auto-save-list-file-prefix (concat my:temp-dir ".saves-"))
+(setq auto-save-list-file-prefix (expand-file-name ".saves-" my:temp-dir))
 (setq auto-save-file-name-transforms `((".*" ,(expand-file-name my:temp-dir) t)))
+(setq temporary-file-directory my:temp-dir)
 ;; 終了時にオートセーブファイルを削除する
 (setq delete-auto-save-file t)
 ;; オートセーブする間隔
@@ -146,7 +150,7 @@
 ;;; バックアップ foo.txt~
 ;;; -----------------------------------------------------------------------------
 ;; バックアップしない
-;(setq make-backup-files nil)
+;;(setq make-backup-files nil)
 ;; バックアップファイルの保存先
 (setq backup-directory-alist `((".*" . ,my:temp-dir)))
 ;; バックアップをバージョン管理する
@@ -189,18 +193,34 @@
 ;;; -----------------------------------------------------------------------------
 ;;; 言語設定
 ;;; -----------------------------------------------------------------------------
-;; 言語環境
 (set-language-environment "Japanese")
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-;(set-file-name-coding-system 'utf-8)		; 不要
-;(set-keyboard-coding-system 'utf-8)		; 不要
-;(set-terminal-coding-system 'utf-8)		; 不要
-(setq-default buffer-file-coding-system 'utf-8)
+;;(prefer-coding-system 'utf-8)				; 不要
+;;(set-default-coding-systems 'utf-8)		; 不要
+;;(set-keyboard-coding-system 'utf-8)		; 不要
+;;(set-terminal-coding-system 'utf-8)		; 不要
+;;(set-file-name-coding-system 'utf-8)		; 不要
+(setq-default buffer-file-coding-system 'utf-8-dos)
+(cond (windows-p
+	   (setq file-name-coding-system 'utf-8-dos)
+	   (setq locale-coding-system    'utf-8-dos))
+	  (darwin-p
+	   (require 'ucs-normalize)
+	   (setq file-name-coding-system 'utf-8-hfs)
+	   (setq locale-coding-system    'utf-8-hfs))
+	  (t
+	   (setq file-name-coding-system 'utf-8)
+	   (setq locale-coding-system    'utf-8)))
 (modify-coding-system-alist 'file "\\.el\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.h\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.cpp\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.java\\'" 	'utf-8)
+
+;;; -----------------------------------------------------------------------------
+;;; East Asian Ambiguous Width 対応
+;;; https://github.com/hamano/locale-eaw
+;;; -----------------------------------------------------------------------------
+(require 'eaw)
+(eaw-fullwidth)
 
 ;;; -----------------------------------------------------------------------------
 ;;; その他

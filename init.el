@@ -1,12 +1,12 @@
 ﻿;;; -----------------------------------------------------------------------------
-;;; Boot
+;;; Start
 ;;; -----------------------------------------------------------------------------
 ;; for improving emacs init time
 (setq gc-cons-threshold (* 1024 1024 1024))
 
 ;; emacs -q -l init.el
 (when load-file-name
-  (setq user-init-file load-file-name)
+  (setq user-init-file (concat (file-name-sans-extension load-file-name) ".el"))
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
 ;;; -----------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 ;;; load-path
 ;;; -----------------------------------------------------------------------------
 (defun my:add-to-load-path (&rest paths)
-  (let (path) 
+  (let (path)
     (dolist (path paths)
       (when (file-directory-p path)
 		(let ((default-directory path))
@@ -55,6 +55,8 @@
 
 (load "init-prelude")
 (load "init-global")
+(load "init-key")
+(load "init-style")
 
 ;;; -----------------------------------------------------------------------------
 ;;; Cleanup
@@ -63,3 +65,7 @@
 
 (when my:user-emacs-editing-p
   (switch-to-buffer (get-buffer "*Messages*")))
+
+;;; -----------------------------------------------------------------------------
+;;; End
+;;; -----------------------------------------------------------------------------

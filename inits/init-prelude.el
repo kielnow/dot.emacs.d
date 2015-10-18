@@ -25,9 +25,9 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (setq package-user-dir (expand-file-name "elpa" my:package-dir))
 
@@ -49,6 +49,7 @@
 ;;; Common Lisp Extensions
 ;;; -----------------------------------------------------------------------------
 (unless (require 'cl-lib nil 'noerror) (require 'cl))
+(require 'cl)
 
 ;;; -----------------------------------------------------------------------------
 ;;; 起動時間を表示
@@ -88,7 +89,7 @@
 ;;; -----------------------------------------------------------------------------
 ;;; 再初期化
 ;;; -----------------------------------------------------------------------------
-(defun reinitialize () 
+(defun reinitialize ()
   "Reinitialize Emacs."
   (interactive)
   (unless my:user-emacs-editing-p
