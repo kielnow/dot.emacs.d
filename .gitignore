@@ -1,6 +1,6 @@
 *~
 \#*\#
 *.elc
-# auto-save-list/
-# tmp/
-# packages/*
+auto-save-list/
+tmp/
+packages/
