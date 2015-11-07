@@ -28,17 +28,25 @@
 (require 'bind-key)
 
 ;; ヘルプ
+;;(bind-key "C-x h"	'help-command)
 (bind-key "M-h"		'help-command)
-(bind-key "C-x h"	'help-command)
+(bind-key "<f1>"	'help-command)
+
+;; 再読み込み
+(bind-key "<f5>" 'revert-buffer)
 
 ;; 日付
 (defun date (&optional p)
   (interactive "P")
   (insert (format-time-string (if p "%Y/%m/%d %H:%M:%S" "%Y%m%d%H%M"))))
-(bind-key "<f5>" 'date)
+(bind-key "<f6>" 'date)
+
+;; 実行
+(bind-key "<f7>"	'eval-last-sexp)
+(bind-key "<C-f7>"	'eval-buffer)
 
 ;; 行末の空白を削除
-(global-set-key (kbd "<M-f8>") 'delete-trailing-whitespace)
+(bind-key "<M-f8>" 'delete-trailing-whitespace)
 
 ;; カーソルを移動せずにスクロール
 ;;(bind-key "M-n" (lambda () (interactive) (scroll-up 1)))

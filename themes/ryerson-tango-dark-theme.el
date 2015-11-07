@@ -15,8 +15,8 @@
  '(isearch ((((class color) (min-colors 89)) (:foreground "#eeeeec" :background "#ce5c00"))))
  '(lazy-highlight ((((class color) (min-colors 89)) (:background "#8f5902"))))
  '(trailing-whitespace ((((class color) (min-colors 89)) (:background "#a40000"))))
- '(mode-line ((((class color) (min-colors 89)) (:box (:line-width -1 :style released-button) :background "#d3d7cf" :foreground "#2e3436"))))
- '(mode-line-inactive ((((class color) (min-colors 89)) (:box (:line-width -1 :style released-button) :background "#555753" :foreground "#eeeeec"))))
+ ;;'(mode-line ((((class color) (min-colors 89)) (:box (:line-width -1 :style released-button) :background "#d3d7cf" :foreground "#2e3436"))))
+ ;;'(mode-line-inactive ((((class color) (min-colors 89)) (:box (:line-width -1 :style released-button) :background "#555753" :foreground "#eeeeec"))))
  '(minibuffer-prompt ((((class color) (min-colors 89)) (:foreground "#b4fa70"))))
  '(escape-glyph ((((class color) (min-colors 89)) (:foreground "#c4a000"))))
  '(error ((((class color) (min-colors 89)) (:foreground "#ff4b4b"))))
@@ -37,7 +37,11 @@
  '(underline ((t (:underline t))))
 
  ;; modified
- '(linum ((((class color) (min-colors 89)) (:background "midnightblue" :foreground "cyan" :height 0.8))))
- '(hl-line ((((class color) (min-colors 89)) (:background "RoyalBlue4")))))
+ '(linum ((t (:inherit (shadow default) :foreground "cyan" :height 0.8))))
+ '(hl-line ((t (:background "RoyalBlue4"))))
+ '(mode-line ((t (:box nil :background "RoyalBlue1" :foreground "#2e3436"))))
+ '(mode-line-inactive ((t (:box nil :background "#555753" :foreground "#eeeeec"))))
+ '(hiwin-face ((t (:background "gray10"))))
+ )
 
 (provide-theme 'ryerson-tango-dark)

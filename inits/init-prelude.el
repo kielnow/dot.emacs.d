@@ -20,6 +20,12 @@
   (my:message-emacs-environment))
 
 ;;; -----------------------------------------------------------------------------
+;;; Common Lisp Extensions
+;;; -----------------------------------------------------------------------------
+(unless (require 'cl-lib nil 'noerror) (require 'cl))
+;(require 'cl)
+
+;;; -----------------------------------------------------------------------------
 ;;; パッケージ管理
 ;;; -----------------------------------------------------------------------------
 (require 'package)
@@ -33,7 +39,52 @@
 
 (package-initialize)
 
-;; require-package
+;;; -----------------------------------------------------------------------------
+;;; my:packages
+;;; -----------------------------------------------------------------------------
+(defvar my:packages
+  '(
+	auto-complete
+	auto-install
+	bind-key
+	col-highlight
+	haskell-mode
+	;;helm
+	init-loader
+	markdown-mode
+	minimap
+	nyan-mode
+	powerline
+	;;recentf-ext
+	;;slime
+	tuareg
+	use-package
+	php-mode
+	web-mode
+	e2wm
+	persp-mode
+	w3m
+	owdriver
+	switch-window
+	hiwin
+	vlf
+	)
+  "A list of my packages.")
+
+(defun my:package-install-list (packages)
+  (let ((refresh-p nil))
+	(dolist (pkg packages)
+	  (unless (package-installed-p pkg)
+		(unless refresh-p
+		  (setq refresh-p t)
+		  (package-refresh-contents))
+		(package-install pkg)))))
+
+(my:package-install-list my:packages)
+
+;;; -----------------------------------------------------------------------------
+;;; require-package
+;;; -----------------------------------------------------------------------------
 (defvar my:-package-refresh-contents-p nil)
 (defun my:-package-refresh-contents-once ()
   (unless my:-package-refresh-contents-p
@@ -44,12 +95,6 @@
     (my:-package-refresh-contents-once)
     (package-install feature))
   (require feature))
-
-;;; -----------------------------------------------------------------------------
-;;; Common Lisp Extensions
-;;; -----------------------------------------------------------------------------
-;(unless (require 'cl-lib nil 'noerror) (require 'cl))
-(require 'cl)
 
 ;;; -----------------------------------------------------------------------------
 ;;; 起動時間を表示

@@ -83,7 +83,7 @@
 ;; 変更があったファイルを自動再読み込み
 ;;(global-auto-revert-mode 1)
 ;; シンボリックリンクをたどる
-;(setq vc-follow-symlink t)
+;;(setq vc-follow-symlink t)
 
 ;; スクリプト保存時に実行属性を付ける
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -104,7 +104,7 @@
 ;; タブ幅を 4 に
 (setq-default tab-width 4)
 ;; タブをスペースに
-;(setq-default indent-tabs-mode nil)
+;;(setq-default indent-tabs-mode nil)
 
 ;; 行末の無駄な空白を削除する
 (defvar my:delete-trailing-whitespace-exclude-suffix
@@ -196,22 +196,31 @@
 ;;; 言語設定
 ;;; -----------------------------------------------------------------------------
 (set-language-environment "Japanese")
-;;(prefer-coding-system 'utf-8)				; 不要
-;;(set-default-coding-systems 'utf-8)		; 不要
-;;(set-keyboard-coding-system 'utf-8)		; 不要
-;;(set-terminal-coding-system 'utf-8)		; 不要
-;;(set-file-name-coding-system 'utf-8)		; 不要
-(setq-default buffer-file-coding-system 'utf-8-dos)
+
+;; 今は不要らしい
+;;(prefer-coding-system 'utf-8)
+;;(set-default-coding-systems 'utf-8)
+;;(set-keyboard-coding-system 'utf-8)
+;;(set-terminal-coding-system 'utf-8)
+;;(set-file-name-coding-system 'utf-8)
+
 (cond (windows-p
+	   (setq-default buffer-file-coding-system 'utf-8-dos)
 	   (setq file-name-coding-system 'utf-8-dos)
-	   (setq locale-coding-system    'utf-8-dos))
+	   (setq locale-coding-system 'utf-8-dos))
 	  (darwin-p
+	   (setq-default buffer-file-coding-system 'utf-8-dos)
 	   (require 'ucs-normalize)
 	   (setq file-name-coding-system 'utf-8-hfs)
-	   (setq locale-coding-system    'utf-8-hfs))
+	   (setq locale-coding-system 'utf-8-hfs)
+	   (add-hook 'shell-mode-hook '(lambda () (set-buffer-process-coding-system 'utf-8-hfs 'utf-8-hfs))))
 	  (t
+	   (setq-default buffer-file-coding-system 'utf-8)
 	   (setq file-name-coding-system 'utf-8)
-	   (setq locale-coding-system    'utf-8)))
+	   (setq locale-coding-system 'utf-8)
+	   (add-hook 'shell-mode-hook '(lambda () (set-buffer-process-coding-system 'utf-8 'utf-8)))))
+
+;; ファイルの種類ごとに文字コードを指定
 (modify-coding-system-alist 'file "\\.el\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.h\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.cpp\\'" 	'utf-8-with-signature)
@@ -230,3 +239,19 @@
 ;; for improving performance
 (when emacs24-p
   (setq-default bidi-display-reordering nil))
+
+;;; -----------------------------------------------------------------------------
+;;; Large file
+;;; -----------------------------------------------------------------------------
+(defvar my:large-file-threshould (* 1024 1024))
+(defun my:find-file-hook ()
+  "If a file is over a given size, make the buffer read only"
+  (when (> (buffer-size) my:large-file-threshould)
+	(message "(Large file)")
+	;; make the buffer read only
+	;;(setq buffer-read-only t)
+	;;(buffer-disable-undo)
+	(fundamental-mode)
+	;;(linum-mode 0)
+	(font-lock-mode 0)))
+(add-hook 'find-file-hook 'my:find-file-hook)
