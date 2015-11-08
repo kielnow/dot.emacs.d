@@ -66,6 +66,7 @@
 	w3m
 	owdriver
 	switch-window
+	theme-looper
 	hiwin
 	vlf
 	)
