@@ -65,10 +65,11 @@
 (setq gc-cons-threshold (* 8 1024 1024))
 
 (when my:user-emacs-editing-p
-  ;;(find-file "~/.emacs.d/init.el")
-  ;;(find-file "~/.emacs.d/inits/init-prelude.el")
-  ;;(find-file "~/.emacs.d/inits/init-global.el")
-  ;;(find-file "~/.emacs.d/inits/init-mode.el")
+  (find-file "~/.emacs.d/init.el")
+  (find-file "~/.emacs.d/inits/init-prelude.el")
+  (find-file "~/.emacs.d/inits/init-global.el")
+  (find-file "~/.emacs.d/inits/init-style.el")
+  (find-file "~/.emacs.d/inits/init-mode.el")
   (switch-to-buffer (get-buffer "*Messages*"))
   (cd user-emacs-directory))
 

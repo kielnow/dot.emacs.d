@@ -48,19 +48,14 @@
 	auto-install
 	bind-key
 	col-highlight
-	haskell-mode
 	;;helm
 	init-loader
-	markdown-mode
 	minimap
 	nyan-mode
+	nyan-prompt
 	powerline
 	;;recentf-ext
-	;;slime
-	tuareg
 	use-package
-	php-mode
-	web-mode
 	e2wm
 	persp-mode
 	w3m
@@ -69,6 +64,15 @@
 	theme-looper
 	hiwin
 	vlf
+
+	;; language
+	markdown-mode
+	haskell-mode
+	tuareg
+	;;slime
+	glsl-mode
+	php-mode
+	web-mode
 	)
   "A list of my packages.")
 

@@ -204,6 +204,8 @@
 ;;(set-terminal-coding-system 'utf-8)
 ;;(set-file-name-coding-system 'utf-8)
 
+;; describe-coding-system
+
 (cond (windows-p
 	   (setq-default buffer-file-coding-system 'utf-8-dos)
 	   (setq file-name-coding-system 'utf-8-dos)

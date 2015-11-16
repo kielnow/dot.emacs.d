@@ -4,6 +4,12 @@
 (setq c-basic-offset 4)
 
 ;;; -----------------------------------------------------------------------------
+;;; hlsl-mode
+;;; -----------------------------------------------------------------------------
+(require 'hlsl-mode)
+(add-to-list 'auto-mode-alist '("\\.hlsli\\'" . hlsl-mode))
+
+;;; -----------------------------------------------------------------------------
 ;;; web-mode
 ;;; -----------------------------------------------------------------------------
 (require 'web-mode)
@@ -69,7 +75,7 @@
 (require 'persp-mode)
 (setq persp-keymap-prefix (kbd "C-c p"))
 (setq persp-add-on-switch-or-display t)
-(persp-mode 1)
+;;(persp-mode 1)
 ;; C-c p s (persp-switch)
 ;; C-c p k (persp-kill)
 
