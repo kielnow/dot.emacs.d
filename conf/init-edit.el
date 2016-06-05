@@ -1,6 +1,14 @@
 (require 'init-prelude)
 
 ;;;-----------------------------------------------------------------------------
+;;; abbrev
+;;;-----------------------------------------------------------------------------
+(use-package abbrev
+  :config
+  (custom-set-variables
+   `(abbrev-file-name ,(expand-file-name "abbrev_defs" my/setting-dir))))
+
+;;;-----------------------------------------------------------------------------
 ;;; company
 ;;;-----------------------------------------------------------------------------
 (use-package company
@@ -51,7 +59,7 @@
 (use-package savekill
   :config
   (custom-set-variables
-   `(save-kill-file-name ,(expand-file-name "kill-ring-saved.el" my/temp-dir))))
+   `(save-kill-file-name ,(expand-file-name "kill-ring-saved.el" my/setting-dir))))
 
 (require 'el-init)
 (el-init-provide)

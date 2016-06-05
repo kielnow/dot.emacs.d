@@ -2,5 +2,6 @@
 \#*\#
 *.elc
 auto-save-list/
-temp/
+tmp/
+etc/
 packages/
