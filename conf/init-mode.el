@@ -1,13 +1,9 @@
-﻿;;; -----------------------------------------------------------------------------
+﻿(require 'init-prelude)
+
+;;; -----------------------------------------------------------------------------
 ;;; c++-mode
 ;;; -----------------------------------------------------------------------------
 (setq c-basic-offset 4)
-
-;;; -----------------------------------------------------------------------------
-;;; hlsl-mode
-;;; -----------------------------------------------------------------------------
-(require 'hlsl-mode)
-(add-to-list 'auto-mode-alist '("\\.hlsli\\'" . hlsl-mode))
 
 ;;; -----------------------------------------------------------------------------
 ;;; web-mode
@@ -72,9 +68,9 @@
 ;;; -----------------------------------------------------------------------------
 ;;; persp-mode
 ;;; -----------------------------------------------------------------------------
-(require 'persp-mode)
-(setq persp-keymap-prefix (kbd "C-c p"))
-(setq persp-add-on-switch-or-display t)
+;;(require 'persp-mode)
+;;(setq persp-keymap-prefix (kbd "C-c p"))
+;;(setq persp-add-on-switch-or-display t)
 ;;(persp-mode 1)
 ;; C-c p s (persp-switch)
 ;; C-c p k (persp-kill)
@@ -82,18 +78,18 @@
 ;;; -----------------------------------------------------------------------------
 ;;; minimap
 ;;; -----------------------------------------------------------------------------
-(require 'minimap)
-(setq minimap-window-location 'right)
-(setq minimap-recenter-type 'relative)
-(setq minimap-update-delay 0.1)
-(setq minimap-width-fraction 0.1)
-(scroll-bar-mode 0)
-(set-face-background 'minimap-active-region-background "RoyalBlue4")
-(set-face-attribute 'minimap-font-face nil :height 20)
-(defun my:minimap-mode-hook ()
-  (setq mode-line-format '("%e" mode-line-front-space mode-line-buffer-identification mode-line-end-spaces)))
-(add-hook 'minimap-mode-hook 'my:minimap-mode-hook)
-(bind-key "<f9>" 'minimap-toggle)
+;;(require 'minimap)
+;;(setq minimap-window-location 'right)
+;;(setq minimap-recenter-type 'relative)
+;;(setq minimap-update-delay 0.1)
+;;(setq minimap-width-fraction 0.1)
+;;(scroll-bar-mode 0)
+;;(set-face-background 'minimap-active-region-background "RoyalBlue4")
+;;(set-face-attribute 'minimap-font-face nil :height 20)
+;;(defun my:minimap-mode-hook ()
+;;  (setq mode-line-format '("%e" mode-line-front-space mode-line-buffer-identification mode-line-end-spaces)))
+;;(add-hook 'minimap-mode-hook 'my:minimap-mode-hook)
+;;(bind-key "<f9>" 'minimap-toggle)
 
 ;;; -----------------------------------------------------------------------------
 ;;; sublimity
@@ -126,3 +122,6 @@
 ;;; -----------------------------------------------------------------------------
 (require 'hiwin)
 ;;(hiwin-mode)
+
+(require 'el-init)
+(el-init-provide)

@@ -1,0 +1,183 @@
+﻿(require 'init-prelude)
+
+;;; -----------------------------------------------------------------------------
+;;; テーマ設定
+;;; -----------------------------------------------------------------------------
+(when emacs24-p
+  (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes/"))
+
+  ;; light
+  ;;(load-theme 'adwaita t)
+  ;;(load-theme 'dichromacy t)
+  ;;(load-theme 'leuven t)
+  ;;(load-theme 'light-blue t)
+  ;;(load-theme 'tango t)
+  ;;(load-theme 'tsdh-light t)
+  ;;(load-theme 'whiteboard t)
+
+  ;; dark
+  (load-theme 'deeper-blue t)
+  ;;(load-theme 'misterioso t)
+  ;;(load-theme 'tango-dark t)
+  ;;(load-theme 'tsdh-dark t)
+  ;;(load-theme 'wombat t)
+
+  ;; black
+  ;;(load-theme 'manoj-dark t)
+  ;;(load-theme 'wheatgrass t)
+  ;;(load-theme 'molokai t)
+
+  ;; blue
+  ;;(load-theme 'ryerson t)
+  ;;(load-theme 'ryerson-tango-dark t)
+
+  ;; テーマ切り替え
+  (use-package theme-looper
+	:config
+	(bind-key "<f12>" 'theme-looper-enable-next-theme)))
+
+;;;-----------------------------------------------------------------------------
+;;; nyan-mode
+;;;-----------------------------------------------------------------------------
+(use-package nyan-mode
+  :config
+  (nyan-mode)
+  (nyan-start-animation)
+  (custom-set-variables '(nyan-wavy-trail t)))
+
+;;;-----------------------------------------------------------------------------
+;;; East Asian Ambiguous Width 問題の修正ロケール
+;;; https://github.com/hamano/locale-eaw
+;;;-----------------------------------------------------------------------------
+(use-package eaw
+  :config
+  (eaw-fullwidth))
+
+;;;-----------------------------------------------------------------------------
+;;; フォント設定
+;;;-----------------------------------------------------------------------------
+(defun my/set-fontset-font-japanese (font)
+  (dolist (charset
+		   '(;;unicode
+			 katakana-jisx0201;半角カナ
+			 japanese-jisx0208;第1-2水準漢字
+			 japanese-jisx0212;第3-4水準漢字
+			 japanese-jisx0213-1
+			 japanese-jisx0213-2
+			 japanese-jisx0213-a
+			 japanese-jisx0213.2004-1))
+		   (set-fontset-font nil charset font)))
+
+(when window-system
+  (cond
+   (windows-p
+    (set-face-attribute 'default nil :family "Consolas" :height 110)
+	;;(my/set-fontset-font-japanese (font-spec :family "Meiryo")))
+    (my/set-fontset-font-japanese (font-spec :family "HGMaruGothicMPRO")))
+    ;;(my/set-fontset-font-japanese (font-spec :family "Migu 1M")))
+   (darwin-p
+    (set-default-font "-*-Dejavu-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
+   (linux-p
+	;;(set-default-font "DejaVu Sans Mono-12")
+	(set-default-font "Ubuntu Mono-12")
+	;;(setq face-font-rescale-alist '((".*Migu 1C.*" . 0.79)))
+	(set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Migu 1C")))))
+
+(add-to-list 'face-font-rescale-alist '(".*Meiryo UI.*" . 1.1))
+(add-to-list 'face-font-rescale-alist '(".*\300\203\300\201\300\203C\300\203\300\212\300\203I.*" . 1.1));メイリオ
+(add-to-list 'face-font-rescale-alist '(".*HG\300\212\333\272\336\274\300\257\300\270M-PRO.*" . 1.1));HG丸ｺﾞｼｯｸM-PRO
+(add-to-list 'face-font-rescale-alist '(".*Migu 1M.*" . 1.1))
+
+;;(defun my/encode (str)
+;;  (mapconcat (lambda (x)
+;;			   (let ((c (substring (encode-coding-string (char-to-string x) 'raw-text) -1 nil)))
+;;				 (if (> x 127) (concat "\300" c) c)))
+;;			 (encode-coding-string str 'sjis) ""))
+
+;;;
+;;; (encode-coding-string (encode-coding-string "メイリオ" 'sjis) 'raw-text)
+;;;
+
+;; フォント一覧を表示する
+(defun my/font-family-list ()
+  (interactive)
+  ;;(setq eval-expression-print-length nil)
+  (dolist (x (font-family-list)) (print x)))
+
+(defun my/list-fonts ()
+  (interactive)
+  (dolist (x (x-list-fonts "*")) (print x)))
+
+;;;
+;;; (w32-select-font)
+;;;
+
+;;;
+;;; http://macemacsjp.osdn.jp/matsuan/FontSettingJp.html
+;;;
+
+;;;
+;;; http://www.nobu417.jp/weblog/blogging/using-emacs-with-little-customizing.html
+;;;
+
+;;;
+;;; http://d.hatena.ne.jp/eggtoothcroc/20130102/p1
+;;;
+;;; フォント
+;;; abcdefghijklmnopqrstuvwxyz
+;;; ABCDEFGHIJKLMNOPQRSTUVWXYZ
+;;; `1234567890-=\[];',./
+;;; ~!@#$%^&*()_+|{}:"<>?
+;;;
+;;; 壱弐参四五壱弐参四五壱弐参四五壱弐参四五壱弐参四五壱弐参四五
+;;; 123456789012345678901234567890123456789012345678901234567890
+;;; ABCdeＡＢＣｄｅ
+;;;
+;;; ┌─────────────────────────────┐
+;;; │　　　　　　　　　　　　　罫線                            │
+;;; └─────────────────────────────┘
+;;;
+
+;;;
+;;;  !"#$%&'()*+,-./
+;;; 0123456789:;<=>?
+;;; @ABCDEFGHIJKLMNO
+;;; PQRSTUVWXYZ[\]^_
+;;; `abcdefghijklmno
+;;; pqrstuvwxyz{|}~
+;;;  ｡｢｣､･ｦｧｨｩｪｫｬｭｮｯ
+;;; ｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿ
+;;; ﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏ
+;;; ﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ
+;;;
+;;; 一二三四五六七八九十
+;;; 壱弐参肆伍陸柒捌玖拾
+;;; 12345678901234567890
+;;;
+
+;;; -----------------------------------------------------------------------------
+;;; フレーム設定
+;;; -----------------------------------------------------------------------------
+(let* ((workarea (assoc 'workarea (car (display-monitor-attributes-list))))
+	   (left   (nth 1 workarea))
+	   (top    (nth 2 workarea))
+	   (width  (/ (nth 3 workarea) 2 (frame-char-width)))
+	   (height (/ (- (nth 4 workarea) 32 32) (frame-char-height))))
+  (setq default-frame-alist
+		(append
+		 `((width  . ,width);(width  . 144)
+		   (height . ,height);(height .  62)
+		   (left   . ,left)
+		   (top    . ,top)
+		   (alpha  . 90)
+		   (cursor-type . box)
+		   ;;(menu-bar-lines . 1)
+		   ;;(tool-bar-lines . 0)
+		   ;;(left-fringe  . 8)
+		   ;;(right-fringe . 8)
+		   ;;(line-spacing . 0)
+		   )
+		 default-frame-alist)))
+
+(require 'el-init)
+(el-init-provide)

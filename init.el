@@ -1,7 +1,7 @@
-﻿;;; -----------------------------------------------------------------------------
+﻿;;;-----------------------------------------------------------------------------
 ;;; Start
-;;; -----------------------------------------------------------------------------
-;; for improving emacs init time
+;;;-----------------------------------------------------------------------------
+;; suppressing GC to improve the initialization time
 (setq gc-cons-threshold (* 1024 1024 1024))
 
 ;; emacs -q -l init.el
@@ -9,70 +9,101 @@
   (setq user-init-file (concat (file-name-sans-extension load-file-name) ".el"))
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
-;;; -----------------------------------------------------------------------------
-;;; 定数
-;;; -----------------------------------------------------------------------------
-(defconst my:init-dir    (locate-user-emacs-file "inits/"))
-(defconst my:lisp-dir    (locate-user-emacs-file "lisp/"))
-(defconst my:lispver-dir (locate-user-emacs-file (format "lisp%d/" emacs-major-version)))
-(defconst my:package-dir (locate-user-emacs-file "packages/"))
-(defconst my:temp-dir    (locate-user-emacs-file "tmp/"))
+;;;-----------------------------------------------------------------------------
+;;; Configuration
+;;;-----------------------------------------------------------------------------
+;; directories
+(defconst my/init-dir    (locate-user-emacs-file "conf/"))
+(defconst my/lisp-dir    (locate-user-emacs-file "elisp/"))
+(defconst my/package-dir (locate-user-emacs-file "packages/"))
+(defconst my/temp-dir    (locate-user-emacs-file "temp/"))
 
-(defconst emacs23-p (= emacs-major-version 23))
-(defconst emacs24-p (= emacs-major-version 24))
-(defconst linux-p   (eq system-type 'gnu/linux))
-(defconst darwin-p  (eq system-type 'darwin))
-(defconst nt-p      (eq system-type 'windows-nt))
-(defconst cygwin-p  (eq system-type 'cygwin))
-(defconst meadow-p  (featurep 'meadow))
-(defconst windows-p (or nt-p cygwin-p meadow-p))
-
+;; ベンチマークを取るかどうか
+(defconst my/benchmark-p t)
 ;; .emacs.d 編集用
-(defconst my:user-emacs-editing-p t)
-(defconst my:experimental-p t)
+(defconst my/user-emacs-editing-p t)
+;; 実験用
+(defconst my/experimental-p t)
 
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; load-path
-;;; -----------------------------------------------------------------------------
-(defun my:add-to-load-path (&rest paths)
+;;;-----------------------------------------------------------------------------
+(defun my/add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths)
       (when (file-directory-p path)
-		(let ((default-directory path))
-		  (add-to-list 'load-path default-directory)
-		  (normal-top-level-add-subdirs-to-load-path))))))
+        (let ((default-directory path))
+          (add-to-list 'load-path default-directory)
+          (normal-top-level-add-subdirs-to-load-path))))))
 
-(my:add-to-load-path
-   my:init-dir
-   my:lisp-dir
-   my:lispver-dir)
+(my/add-to-load-path my/init-dir
+                     my/lisp-dir)
 
-;;; -----------------------------------------------------------------------------
-;;; init
-;;; -----------------------------------------------------------------------------
-;; .elc と .el のタイムスタンプを比較して新しいほうを読み込む
+;; *.el と *.elc の新しいほうを読み込む
 (when (boundp 'load-prefer-newer) (setq load-prefer-newer t))
 
-(load "init-prelude")
-(load "init-global")
-(load "init-key")
-(load "init-style")
-(load "init-mode")
+;;;-----------------------------------------------------------------------------
+;;; package
+;;;-----------------------------------------------------------------------------
+(require 'package)
+(setq package-user-dir (expand-file-name "elpa/" my/package-dir))
 
-;;; -----------------------------------------------------------------------------
+;; repositories
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+(package-initialize)
+
+(defvar my/-package-refresh-contents-p nil)
+(defun my/package-refresh-contents-once ()
+  (unless my/-package-refresh-contents-p
+    (setq my/-package-refresh-contents-p t)
+    (package-refresh-contents)))
+(defun my/package-install (pkg)
+  (unless (package-installed-p pkg)
+    (my/package-refresh-contents-once)
+    (package-install pkg)))
+(defun my/package-install-from-list (pkgs)
+  (dolist (pkg pkgs) (my/package-install pkg)))
+
+;;;-----------------------------------------------------------------------------
+;;; use-package
+;;;-----------------------------------------------------------------------------
+(my/package-install 'use-package)
+(require 'use-package)
+
+;;;-----------------------------------------------------------------------------
+;;; benchmark-init
+;;;-----------------------------------------------------------------------------
+(when my/benchmark-p
+  (my/package-install 'benchmark-init)
+  (use-package benchmark-init))
+
+;;;-----------------------------------------------------------------------------
+;;; el-init
+;;;-----------------------------------------------------------------------------
+(my/package-install 'el-init)
+(my/package-install 'el-init-viewer)
+(el-init-load my/init-dir
+			  :subdirectories '(".")
+              :wrappers (if my/user-emacs-editing-p
+                            '(el-init-require/record-error el-init-require/benchmark)
+                          '(el-init-require/record-error)))
+
+;;;-----------------------------------------------------------------------------
 ;;; Cleanup
-;;; -----------------------------------------------------------------------------
-(setq gc-cons-threshold (* 8 1024 1024))
+;;;-----------------------------------------------------------------------------
+(setq gc-cons-threshold (* 16 1024 1024))
 
-(when my:user-emacs-editing-p
-  (find-file "~/.emacs.d/init.el")
-  (find-file "~/.emacs.d/inits/init-prelude.el")
-  (find-file "~/.emacs.d/inits/init-global.el")
-  (find-file "~/.emacs.d/inits/init-style.el")
-  (find-file "~/.emacs.d/inits/init-mode.el")
-  (switch-to-buffer (get-buffer "*Messages*"))
-  (cd user-emacs-directory))
+(when my/benchmark-p
+  (benchmark-init/deactivate))
 
-;;; -----------------------------------------------------------------------------
-;;; End
-;;; -----------------------------------------------------------------------------
+(when my/user-emacs-editing-p
+  ;;(switch-to-buffer (get-buffer "*Messages*"))
+  ;;(cd user-emacs-directory)
+  (benchmark-init/show-durations-tree)
+  ;;(benchmark-init/show-durations-tabulated)
+  (el-init-viewer))
+
