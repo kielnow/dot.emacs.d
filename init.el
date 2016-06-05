@@ -14,7 +14,7 @@
 ;;;-----------------------------------------------------------------------------
 ;; directories
 (defconst my/init-dir    (locate-user-emacs-file "conf/"))
-(defconst my/lisp-dir    (locate-user-emacs-file "elisp/"))
+(defconst my/lisp-dir    (locate-user-emacs-file "lisp/"))
 (defconst my/package-dir (locate-user-emacs-file "packages/"))
 (defconst my/setting-dir (locate-user-emacs-file "etc/"))
 (defconst my/temp-dir    (locate-user-emacs-file "tmp/"))
