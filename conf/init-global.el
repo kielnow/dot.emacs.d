@@ -43,6 +43,10 @@
 ;; hl-line-mode
 (global-hl-line-mode 1)
 
+;; 音を鳴らさない
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
+
 ;;;-----------------------------------------------------------------------------
 ;;; 操作設定
 ;;;-----------------------------------------------------------------------------
@@ -63,8 +67,14 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
+;;;-----------------------------------------------------------------------------
+;;; icomplete
+;;;-----------------------------------------------------------------------------
 (icomplete-mode 1)
 
+;;;-----------------------------------------------------------------------------
+;;; iswitchb
+;;;-----------------------------------------------------------------------------
 ;; バッファ切り替えでインクリメンタル補完を使う
 (iswitchb-mode 1)
 ;; C-f, C-b, C-n, C-p で候補を切り替えられるように
@@ -230,7 +240,8 @@
 	   (add-hook 'shell-mode-hook '(lambda () (set-buffer-process-coding-system 'utf-8 'utf-8)))))
 
 ;; ファイルの種類ごとに文字コードを指定
-(modify-coding-system-alist 'file "\\.el\\'" 	'utf-8-with-signature)
+(modify-coding-system-alist 'file "\\.el\\'" 	'utf-8)
+(modify-coding-system-alist 'file "\\.keyfreq.lock\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.h\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.cpp\\'" 	'utf-8-with-signature)
 (modify-coding-system-alist 'file "\\.java\\'" 	'utf-8)

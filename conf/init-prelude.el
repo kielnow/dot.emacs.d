@@ -96,8 +96,8 @@
   (defvar w32-window-fullscreen-p nil)
   (defun w32-toggle-window-fullscreen ()
 	(interactive)
-	(setq w32-window-fullscreen-p (not w32-window-fullscreen-p))
-	(if w32-window-fullscreen-p (w32-restore-window) (w32-maximize-window))))
+	(if w32-window-fullscreen-p (w32-restore-window) (w32-maximize-window))
+	(setq w32-window-fullscreen-p (not w32-window-fullscreen-p))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Prelude

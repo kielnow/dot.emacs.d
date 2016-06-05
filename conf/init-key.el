@@ -1,5 +1,17 @@
 ﻿(require 'init-prelude)
 
+;;;-----------------------------------------------------------------------------
+;;; keyfreq
+;;;-----------------------------------------------------------------------------
+(use-package keyfreq
+  :config
+  (custom-set-variables
+   `(keyfreq-file ,(expand-file-name ".emacs.keyfreq" my/temp-dir))
+   `(keyfreq-file-lock ,(expand-file-name ".emacs.keyfreq.lock" my/temp-dir)))
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  (remove-hook 'kill-emacs-hook 'keyfreq-mustsave--do))
+
 ;;; -----------------------------------------------------------------------------
 ;;; キー設定
 ;;; -----------------------------------------------------------------------------

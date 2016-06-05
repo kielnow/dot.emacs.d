@@ -2,32 +2,68 @@
 ;;; package
 ;;;-----------------------------------------------------------------------------
 (defvar my/packages
-  '(
-	minimap
-	theme-looper
-	;;auto-complete
+  '(use-package
+	el-init
+	el-get
+	auto-install
 	bind-key
-	col-highlight
-	;;haskell-mode
-	;;helm
-	markdown-mode
-	;;minimap
-	nyan-mode
-	powerline
-	;;recentf-ext
-	;;slime
-	;;tuareg
-	;;php-mode
-	web-mode
+	;;--------------------------------------------
+	;; lib
+	;; http://qiita.com/pogin503/items/01005402dc7cfd375b55
+	;;--------------------------------------------
+	dash
+	dash-functional
+	s
+	f
+	ht
+	;;--------------------------------------------
+	;; edit
+	;;--------------------------------------------
+	fuzzy
+	company
+	;;auto-complete
+	;;ac-helm
+	helm
+	helm-company
+	vlf
+	savekill
+	keyfreq
+	;;--------------------------------------------
+	;; window
+	;;--------------------------------------------
+	popwin
 	e2wm
 	;;persp-mode
-	;;w3m
 	owdriver
 	switch-window
 	hiwin
-	vlf
-	;;auto-install
-	;;init-loader
+	;;recentf-ext
+	;;--------------------------------------------
+	;; style
+	;;--------------------------------------------
+	theme-looper
+	nyan-mode
+	powerline
+	minimap
+	col-highlight
+	;;--------------------------------------------
+	;; language
+	;;--------------------------------------------
+	quickrun
+	markdown-mode
+	glsl-mode
+	shader-mode
+	haskell-mode
+	tuareg
+	;;slime
+	web-mode
+	php-mode
+	;;--------------------------------------------
+	;; application
+	;;--------------------------------------------
+	migemo
+	w3m
+	twittering-mode
 	))
 
 (my/package-install-from-list my/packages)
@@ -40,13 +76,23 @@
 
 (my/package-install 'el-get)
 (use-package el-get
+  :init
+  (custom-set-variables `(el-get-dir ,(expand-file-name "el-get/" my/package-dir)))
   :config
-  (setq el-get-dir (expand-file-name my/package-dir))
-  (setq my/el-get-recipe-dir (concat el-get-dir "recipes/"))
-  (setq el-get-recipe-path-elpa (concat my/el-get-recipe-dir "elpa/"))
-  (setq el-get-recipe-path-emacswiki (concat my/el-get-recipe-dir "emacswiki/"))
-  (setq el-get-recipe-path (list my/el-get-recipe-dir el-get-recipe-path-elpa el-get-recipe-path-emacswiki))
-  (require 'el-get-emacswiki))
+  (use-package el-get-emacswiki))
+
+;;;-----------------------------------------------------------------------------
+;;; auto-install
+;;;
+;;; M-x install-elisp URL
+;;; M-x install-elisp-from-emacswiki EmacsWikiのページ名
+;;; M-x install-elisp-from-gist gist-id
+;;;-----------------------------------------------------------------------------
+;;(my/package-install 'auto-install)
+;;(use-package auto-install
+;;  :config
+;;  (setq auto-install-directory (expand-file-name my/lisp-dir))
+;;  (auto-install-compatibility-setup))
 
 (require 'el-init)
 (el-init-provide)
