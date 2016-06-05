@@ -1,4 +1,4 @@
-﻿(require 'init-prelude)
+(require 'init-prelude)
 
 ;;;-----------------------------------------------------------------------------
 ;;; テーマ設定
@@ -170,6 +170,58 @@
 		   ;;(line-spacing . 0)
 		   )
 		 default-frame-alist)))
+
+;;;-----------------------------------------------------------------------------
+;;; minimap
+;;;-----------------------------------------------------------------------------
+(use-package minimap
+  :config
+  (setq minimap-window-location 'right)
+  (setq minimap-recenter-type 'relative)
+  (setq minimap-update-delay 0.1)
+  (setq minimap-width-fraction 0.05)
+  (setq minimap-minimum-width 24)
+  (scroll-bar-mode 0)
+  (set-face-background 'minimap-active-region-background "RoyalBlue4")
+  (set-face-attribute 'minimap-font-face nil :height 20)
+  (defun my/minimap-mode-hook ()
+	(setq mode-line-format '("%e" mode-line-front-space mode-line-buffer-identification mode-line-end-spaces)))
+  (add-hook 'minimap-mode-hook 'my/minimap-mode-hook)
+  (bind-key "<f9>" 'minimap-mode))
+
+;;;-----------------------------------------------------------------------------
+;;; sublimity
+;;;-----------------------------------------------------------------------------
+;; (require 'sublimity)
+;; (sublimity-mode)
+;;
+;; ;; sublimity-map
+;; (require 'sublimity-map)
+;; (sublimity-map-set-delay 0.1)
+;; (setq sublimity-map-size 20)
+;; (setq sublimity-map-active-region 'hl-line)
+;; (scroll-bar-mode 0)
+;;
+;; ;; sublimity-attractive
+;; (require 'sublimity-attractive)
+;; (setq sublimity-attractive-centering-width nil)
+;; (sublimity-attractive-hide-bars)
+;; (sublimity-attractive-hide-vertical-border)
+;; (sublimity-attractive-hide-fringes)
+;; (sublimity-attractive-window-change)
+;;
+;; ;; sublimity-scroll
+;; (require 'sublimity-scroll)
+;; (setq sublimity-scroll-weight 1)
+;; (setq sublimity-scroll-drift-length 4)
+
+;;;-----------------------------------------------------------------------------
+;;; hiwin
+;;;-----------------------------------------------------------------------------
+(use-package hiwin
+  :config
+  ;;(hiwin-mode)
+  )
 
 (require 'el-init)
 (el-init-provide)
