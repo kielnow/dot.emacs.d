@@ -1,4 +1,4 @@
-(require 'init-prelude)
+﻿(require 'init-prelude)
 
 ;;;-----------------------------------------------------------------------------
 ;;; テーマ設定
@@ -60,13 +60,22 @@
 			 japanese-jisx0213.2004-1))
 		   (set-fontset-font nil charset font)))
 
+(defun my/set-fontset-font-symbol (font)
+  (dolist (charset
+		   '((#x2000 . #x2AFF);数学記号
+			 )
+		   (set-fontset-font nil charset font))))
+
 (when window-system
   (cond
    (windows-p
     (set-face-attribute 'default nil :family "Consolas" :height 110)
-	;;(my/set-fontset-font-japanese (font-spec :family "Meiryo")))
-    (my/set-fontset-font-japanese (font-spec :family "HGMaruGothicMPRO")))
-    ;;(my/set-fontset-font-japanese (font-spec :family "Migu 1M")))
+	;;(my/set-fontset-font-japanese (font-spec :family "Meiryo"))
+    (my/set-fontset-font-japanese (font-spec :family "HGMaruGothicMPRO"))
+    ;;(my/set-fontset-font-japanese (font-spec :family "Migu 1M"))
+	(my/set-fontset-font-symbol (font-spec :family "Meiryo UI"))
+	;;(my/set-fontset-font-symbol (font-spec :family "\202l\202r \203S\203V\203b\203N"));MS ゴシック
+	)
    (darwin-p
     (set-default-font "-*-Dejavu-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
    (linux-p
@@ -75,9 +84,10 @@
 	;;(setq face-font-rescale-alist '((".*Migu 1C.*" . 0.79)))
 	(set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Migu 1C")))))
 
-(add-to-list 'face-font-rescale-alist '(".*Meiryo UI.*" . 1.1))
+(add-to-list 'face-font-rescale-alist '(".*Meiryo UI.*" . 0.9))
 (add-to-list 'face-font-rescale-alist '(".*\300\203\300\201\300\203C\300\203\300\212\300\203I.*" . 1.1));メイリオ
 (add-to-list 'face-font-rescale-alist '(".*HG\300\212\333\272\336\274\300\257\300\270M-PRO.*" . 1.1));HG丸ｺﾞｼｯｸM-PRO
+(add-to-list 'face-font-rescale-alist '(".*\300\202l\300\202r \300\203S\300\203V\300\203b\300\203N.*" . 1.1));MS ゴシック
 (add-to-list 'face-font-rescale-alist '(".*Migu 1M.*" . 1.1))
 
 ;;(defun my/encode (str)
