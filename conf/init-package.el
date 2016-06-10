@@ -16,6 +16,7 @@
 	s
 	f
 	ht
+	namespaces
 	;;--------------------------------------------
 	;; edit
 	;;--------------------------------------------
@@ -94,6 +95,11 @@
 ;;  :config
 ;;  (setq auto-install-directory (expand-file-name my/lisp-dir))
 ;;  (auto-install-compatibility-setup))
+
+;;;-----------------------------------------------------------------------------
+;;; others
+;;;-----------------------------------------------------------------------------
+(require 'naruto)
 
 (require 'el-init)
 (el-init-provide)
