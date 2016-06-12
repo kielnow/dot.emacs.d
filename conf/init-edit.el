@@ -157,10 +157,9 @@
    ("C-x C-i" . helm-imenu)
    ("C-M-s"   . helm-occur)
    ("M-x"     . helm-M-x)
-   ("M-y"     . helm-show-kill-ring))))
-(use-package helm
-  :config
-  (bind-key "C-o" 'helm-occur-from-isearch isearch-mode-map))
+   ("M-y"     . helm-show-kill-ring)
+   :map isearch-mode-map
+   ("C-o"     . helm-occur-from-isearch)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; popwin
@@ -192,7 +191,7 @@
 ;;;-----------------------------------------------------------------------------
 (use-package undohist
   :config
-  (set-variable 'undohist-directory (expand-file-name "undohist/" my/temp-dir))
+  (customize-set-variable 'undohist-directory (expand-file-name "undohist/" my/temp-dir))
   (undohist-initialize))
 
 ;;;-----------------------------------------------------------------------------
