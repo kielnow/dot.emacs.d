@@ -15,7 +15,7 @@
   - cua-rectangle-mark-mode
   - expand-region
   - multiple-cursors
-    - 一括編集
+  - 一括編集
     - [x] color-moccur, moccur-edit
     - [ ] occur
     - [ ] all, all-ext
