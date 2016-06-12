@@ -20,15 +20,32 @@
 	;;--------------------------------------------
 	;; edit
 	;;--------------------------------------------
+	expand-region
+	multiple-cursors
+	color-moccur
+	wgrep
+	redo+
+	undohist
+	undo-tree
+	point-undo
 	fuzzy
 	company
 	;;auto-complete
 	;;ac-helm
 	helm
 	helm-company
+	helm-c-moccur
+	all-ext
 	vlf
 	savekill
 	keyfreq
+	;;--------------------------------------------
+	;; eldoc
+	;;--------------------------------------------
+	eldoc-extension
+	c-eldoc
+	css-eldoc
+	php-eldoc
 	;;--------------------------------------------
 	;; window
 	;;--------------------------------------------
@@ -47,6 +64,9 @@
 	powerline
 	minimap
 	col-highlight
+	rainbow-mode
+	auto-highlight-symbol
+	highlight-symbol
 	;;--------------------------------------------
 	;; language
 	;;--------------------------------------------
@@ -73,14 +93,14 @@
 ;;; el-get
 ;;;-----------------------------------------------------------------------------
 (defvar my/el-get-packages
-  '())
+  '(moccur-edit))
 
 (my/package-install 'el-get)
 (use-package el-get
   :init
-  (custom-set-variables `(el-get-dir ,(expand-file-name "el-get/" my/package-dir)))
+  (set-variable 'el-get-dir (expand-file-name "el-get/" my/package-dir))
   :config
-  ;;(my/add-to-load-path el-get-dir)
+  (my/add-to-load-path el-get-dir)
   (use-package el-get-emacswiki))
 
 ;;;-----------------------------------------------------------------------------

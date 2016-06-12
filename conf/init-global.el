@@ -1,7 +1,7 @@
 (require 'init-prelude)
 
 ;;;-----------------------------------------------------------------------------
-;;; 表示設定
+;;; 基本設定
 ;;;-----------------------------------------------------------------------------
 ;; 起動画面を抑制
 (setq inhibit-startup-message t)
@@ -23,7 +23,7 @@
 ;; ファイルサイズをモードラインに表示
 (setq size-indication-mode t)
 ;; 現在の関数名をモードラインに表示
-;;(which-function-mode 1)
+;;(which-function-mode t)
 ;; 時間をモードラインに表示
 (setq display-time-string-forms '((format "%s/%s(%s)%s:%s" month day dayname 24-hours minutes)))
 (display-time)
@@ -32,26 +32,60 @@
 (setq transient-mark-mode t)
 
 ;; 対応する括弧をハイライト
-(show-paren-mode 1)
+(show-paren-mode t)
 (setq show-paren-delay 0)
 (setq show-paren-style 'mixed)
 
 ;; linum-mode
-(global-linum-mode 1)
+(global-linum-mode t)
 (setq linum-format "%5d")
 
 ;; hl-line-mode
-(global-hl-line-mode 1)
+(global-hl-line-mode t)
 
 ;; 音を鳴らさない
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
+;; ミニバッファの履歴を保存する
+(savehist-mode t)
+(setq history-length 3000)
+
+;; カレントディレクトリ設定
+;;(cd "~")
+;; クリップボードを使う
+(setq x-select-enable-clipboard t)
+;; ゴミ箱を使う
+(setq delete-by-moving-to-trash t)
+
+;; 変更があったファイルを自動再読み込み
+;;(global-auto-revert-mode t)
+;; シンボリックリンクをたどる
+;;(setq vc-follow-symlink t)
+
 ;;;-----------------------------------------------------------------------------
 ;;; 操作設定
 ;;;-----------------------------------------------------------------------------
-;; (yes/no) を (y/n) に
+;; yes or no を y or n に
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; 論理行移動に
+;;(setq line-move-visual nil)
+
+;; リージョン内の行数と文字数をモードラインに表示する
+;; http://d.hatena.ne.jp/sonota88/20110224/1298557375
+(defun my/count-lines-and-chars ()
+  (if mark-active
+	  (format "%d lines,%d chars"
+			  (count-lines (region-beginning) (region-end))
+			  (- (region-end) (region-beginning)))
+	""))
+(add-to-list 'default-mode-line-format '(:eval (my/count-lines-and-chars)))
+
+;;;-----------------------------------------------------------------------------
+;;; icomplete
+;;;-----------------------------------------------------------------------------
+(icomplete-mode t)
 
 ;; 補完で大文字小文字を区別しない
 (setq completion-ignore-case t)
@@ -60,24 +94,11 @@
 ;; バッファ名の補間で大文字小文字を区別しない
 (setq read-buffer-completion-ignore-case t)
 
-;; 論理行移動に
-(setq line-move-visual nil)
-
-;; バッファ名が同一の場合にディレクトリ名を付加
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-
-;;;-----------------------------------------------------------------------------
-;;; icomplete
-;;;-----------------------------------------------------------------------------
-(icomplete-mode 1)
-
 ;;;-----------------------------------------------------------------------------
 ;;; iswitchb
 ;;;-----------------------------------------------------------------------------
 ;; バッファ切り替えでインクリメンタル補完を使う
-(iswitchb-mode 1)
-;; C-f, C-b, C-n, C-p で候補を切り替えられるように
+(iswitchb-mode t)
 (add-hook 'iswitchb-define-mode-map-hook
 		  (lambda ()
 			(define-key iswitchb-mode-map "\C-f" 'iswitchb-next-match)
@@ -85,19 +106,47 @@
 			(define-key iswitchb-mode-map "\C-n" 'iswitchb-next-match)
 			(define-key iswitchb-mode-map "\C-p" 'iswitchb-prev-match)))
 
-;; カレントディレクトリ設定
-(cd "~")
-;; OS のクリップボードを使う
-(setq x-select-enable-clipboard t)
-;; ゴミ箱を使う
-(setq delete-by-moving-to-trash t)
+;;;-----------------------------------------------------------------------------
+;;; uniquify
+;;;-----------------------------------------------------------------------------
+;; バッファ名が同一の場合にディレクトリ名を付加
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
 
-;; ロックファイルを作成しない
-(setq create-lockfiles nil)
-;; 変更があったファイルを自動再読み込み
-;;(global-auto-revert-mode 1)
-;; シンボリックリンクをたどる
-;;(setq vc-follow-symlink t)
+;;;-----------------------------------------------------------------------------
+;;; 編集設定
+;;;-----------------------------------------------------------------------------
+;; タブ幅を 4 に
+(setq-default tab-width 4)
+;; インデントにタブを使う
+(setq-default indent-tabs-mode t)
+
+;; kill-line で改行も切り取る
+;;(setq kill-whole-line t)
+;; リージョン選択時に文字を入力するとリージョンを削除する
+;;(delete-selection-mode t)
+
+;; 区切り文字に全角スペースや・などを含める
+(setq paragraph-start '"^\\([ 　・■◆●□◇○<\t\n\f]\\|(?[0-9a-zA-Z]+)\\)")
+
+;; ファイル末尾に自動的に改行を入れない
+(setq-default mode-require-final-newline nil)
+(setq-default require-final-newline nil)
+;; バッファ終端で次の行に移動したときに自動的に改行しない
+(setq-default next-line-add-newlines nil)
+
+;; 行末の空白を削除する
+(defvar my/delete-trailing-whitespace-exclude-suffix
+  (list "\\.rd$" "\\.md$" "\\.rbt$" "\\.rab$"))
+(defun my/delete-trailing-whitespace ()
+  (interactive)
+  (cond
+   ((equal nil
+           (loop for pattern in my/delete-trailing-whitespace-exclude-suffix
+                 thereis (string-match pattern buffer-file-name)))
+    (delete-trailing-whitespace))))
+;;(add-hook 'before-save-hook 'my/delete-trailing-whitespace)
 
 ;; スクリプト保存時に実行属性を付ける
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -113,41 +162,13 @@
 (add-hook 'emacs-lisp-mode-hook 'my/remove-elc-on-save)
 
 ;;;-----------------------------------------------------------------------------
-;;; 編集設定
+;;; ロックファイル .#foo.txt
 ;;;-----------------------------------------------------------------------------
-;; タブ幅を 4 に
-(setq-default tab-width 4)
-;; インデントはタブを使う
-(setq-default indent-tabs-mode t)
-
-;; 行末の無駄な空白を削除する
-(defvar my/delete-trailing-whitespace-exclude-suffix
-  (list "\\.rd$" "\\.md$" "\\.rbt$" "\\.rab$"))
-(defun my/delete-trailing-whitespace ()
-  (interactive)
-  (cond
-   ((equal nil
-           (loop for pattern in my/delete-trailing-whitespace-exclude-suffix
-                 thereis (string-match pattern buffer-file-name)))
-    (delete-trailing-whitespace))))
-;;(add-hook 'before-save-hook 'my/delete-trailing-whitespace)
-
-;; ファイル末尾に自動的に改行を入れない
-(setq-default mode-require-final-newline nil)
-(setq-default require-final-newline nil)
-;; バッファ終端で次の行に移動したときに自動的に改行しない
-(setq-default next-line-add-newlines nil)
-
-;; 区切り文字に全角スペースや・などを含める
-(setq paragraph-start '"^\\([ 　・■◆●□◇○<\t\n\f]\\|(?[0-9a-zA-Z]+)\\)")
-
-;; kill-line で改行も切り取る
-;;(setq kill-whole-line t)
-;; リージョン選択時に文字を入力するとリージョンを削除する
-;;(delete-selection-mode t)
+;; ロックファイルを作成しない
+(setq create-lockfiles nil)
 
 ;;;-----------------------------------------------------------------------------
-;;; オートセーブ #foo.txt"
+;;; オートセーブ #foo.txt
 ;;;
 ;;; 復元方法 M-x recover-file RET ファイル名 RET
 ;;;-----------------------------------------------------------------------------
@@ -172,12 +193,12 @@
 (setq backup-directory-alist `((".*" . ,my/temp-dir)))
 ;; バックアップをバージョン管理する
 (setq version-control t)
-(setq kept-new-versions 4)
-(setq kept-old-versions 4)
+(setq kept-new-versions 8)
+(setq kept-old-versions 8)
 (setq delete-old-versions t)
 
 ;;;-----------------------------------------------------------------------------
-;;; *scratch* バッファ
+;;; *scratch*
 ;;;-----------------------------------------------------------------------------
 ;; *scratch* バッファの初期メッセージを消す
 (setq initial-scratch-message "")

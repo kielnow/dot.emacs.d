@@ -5,9 +5,8 @@
 ;;;-----------------------------------------------------------------------------
 (use-package keyfreq
   :config
-  (custom-set-variables
-   `(keyfreq-file ,(expand-file-name ".emacs.keyfreq" my/setting-dir))
-   `(keyfreq-file-lock ,(expand-file-name ".emacs.keyfreq.lock" my/setting-dir)))
+  (set-variable 'keyfreq-file (expand-file-name ".emacs.keyfreq" my/setting-dir))
+  (set-variable 'keyfreq-file-lock (expand-file-name ".emacs.keyfreq.lock" my/setting-dir))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1)
   (remove-hook 'kill-emacs-hook 'keyfreq-mustsave--do))
@@ -135,16 +134,26 @@
  ("<C-f12>" . my/frame-alpha-increase)
  ("<C-f10>" . my/frame-alpha-set))
 
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; 右クリックメニュー
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (when window-system
   (defun my/mouse-edit-menu (event)
 	(interactive "e")
 	(popup-menu menu-bar-edit-menu))
-  
   (bind-key "<mouse-3>" 'my/mouse-edit-menu)
   (bind-key "<C-mouse-3>" 'mouse-popup-menubar))
+
+;;;-----------------------------------------------------------------------------
+;;; switch-to-minibuffer-window
+;;;-----------------------------------------------------------------------------
+(defun switch-to-minibuffer-window ()
+  "switch to minibuffer window (if active)"
+  (interactive)
+  (when (active-minibuffer-window)
+    (select-frame-set-input-focus (window-frame (active-minibuffer-window)))
+    (select-window (active-minibuffer-window))))
+(bind-key "<f8>" 'switch-to-minibuffer-window)
 
 (require 'el-init)
 (el-init-provide)

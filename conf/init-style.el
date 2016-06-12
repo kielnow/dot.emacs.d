@@ -43,7 +43,7 @@
   :config
   (nyan-mode)
   (nyan-start-animation)
-  (custom-set-variables '(nyan-wavy-trail t)))
+  (set-variable 'nyan-wavy-trail t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; フォント設定
@@ -200,22 +200,34 @@
 		 default-frame-alist)))
 
 ;;;-----------------------------------------------------------------------------
+;;; highlight-symbol
+;;;-----------------------------------------------------------------------------
+(use-package auto-highlight-symbol
+  :config
+  (set-variable 'ahs-idle-interval 0.2)
+  ;;(global-auto-highlight-symbol-mode t)
+  )
+(use-package highlight-symbol
+  :bind
+  (("C-c h" . highlight-symbol)))
+
+;;;-----------------------------------------------------------------------------
 ;;; minimap
 ;;;-----------------------------------------------------------------------------
-(use-package minimap
-  :config
-  (setq minimap-window-location 'right)
-  (setq minimap-recenter-type 'relative)
-  (setq minimap-update-delay 0.1)
-  (setq minimap-width-fraction 0.05)
-  (setq minimap-minimum-width 24)
-  (scroll-bar-mode 0)
-  (set-face-background 'minimap-active-region-background "RoyalBlue4")
-  (set-face-attribute 'minimap-font-face nil :height 20)
-  (defun my/minimap-mode-hook ()
-	(setq mode-line-format '("%e" mode-line-front-space mode-line-buffer-identification mode-line-end-spaces)))
-  (add-hook 'minimap-mode-hook 'my/minimap-mode-hook)
-  (bind-key "<f9>" 'minimap-mode))
+;;(use-package minimap
+;;  :config
+;;  (setq minimap-window-location 'right)
+;;  (setq minimap-recenter-type 'relative)
+;;  (setq minimap-update-delay 0.1)
+;;  (setq minimap-width-fraction 0.05)
+;;  (setq minimap-minimum-width 24)
+;;  (scroll-bar-mode 0)
+;;  (set-face-background 'minimap-active-region-background "RoyalBlue4")
+;;  (set-face-attribute 'minimap-font-face nil :height 20)
+;;  (defun my/minimap-mode-hook ()
+;;	(setq mode-line-format '("%e" mode-line-front-space mode-line-buffer-identification mode-line-end-spaces)))
+;;  (add-hook 'minimap-mode-hook 'my/minimap-mode-hook)
+;;  (bind-key "<f9>" 'minimap-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; sublimity

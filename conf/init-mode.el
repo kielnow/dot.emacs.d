@@ -1,9 +1,27 @@
 (require 'init-prelude)
 
+;;;
+;;; M-x info Ret => Elisp => Standar Hooks
+;;;
+
 ;;;-----------------------------------------------------------------------------
-;;; c++-mode
+;;; eldoc
 ;;;-----------------------------------------------------------------------------
-(setq c-basic-offset 4)
+(use-package eldoc-extension)
+(setq eldoc-idle-delay 0.2)
+(setq eldoc-echo-area-use-multiline-p t)
+
+;;;-----------------------------------------------------------------------------
+;;; emacs-lisp-mode
+;;;-----------------------------------------------------------------------------
+(defun my/emacs-lisp-mode-hook ()
+  (lambda () (turn-on-eldoc-mode)))
+(add-hook 'emacs-lisp-mode-hook 'my/emacs-lisp-mode-hook)
+
+;;;-----------------------------------------------------------------------------
+;;; cc-mode
+;;;-----------------------------------------------------------------------------
+(add-hook 'c-mode-common-hook (lambda () (c-set-style "stroustrup")))
 
 ;;;-----------------------------------------------------------------------------
 ;;; hlsl-mode
@@ -28,7 +46,8 @@
 	(setq web-mode-css-indent-offset    2)
 	(setq web-mode-code-indent-offset   2)
 	(setq indent-tabs-mode nil)
-	(setq tab-width 2))
+	(setq tab-width 2)
+	(rainbow-mode t))
   (add-hook 'web-mode-hook 'my:web-mode-hook)
   ;; C-c C-n   (web-mode-navigate)
   ;; C-c C-e / (web-mode-element-close)
