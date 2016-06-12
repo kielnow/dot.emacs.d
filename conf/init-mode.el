@@ -10,6 +10,8 @@
 (use-package eldoc-extension)
 (setq eldoc-idle-delay 0.2)
 (setq eldoc-echo-area-use-multiline-p t)
+;; M-: (eval-expression)
+(add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 
 ;;;-----------------------------------------------------------------------------
 ;;; emacs-lisp-mode

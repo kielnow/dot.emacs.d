@@ -2,11 +2,11 @@
 ;;; package
 ;;;-----------------------------------------------------------------------------
 (defvar my/packages
-  '(use-package
-	el-init
+  '(el-init
+	use-package
+	bind-key
 	el-get
 	auto-install
-	bind-key
 	;;--------------------------------------------
 	;; lib
 	;; http://qiita.com/pogin503/items/01005402dc7cfd375b55

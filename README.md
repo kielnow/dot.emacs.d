@@ -12,13 +12,13 @@
 ## Features
 
 - 編集系
-  - cua-mode
+  - cua-rectangle-mark-mode
   - expand-region
   - multiple-cursors
-  - 一括編集
-	- [x] color-moccur, moccur-edit
-	- [ ] occur
-	- [ ] all, all-ext
+    - 一括編集
+    - [x] color-moccur, moccur-edit
+    - [ ] occur
+    - [ ] all, all-ext
 - 操作系
   - helm
   - redo+
@@ -30,6 +30,6 @@
 - ウィンドウ操作系
   - iswitchb
   - タブ
-	- [x] elscreen
-	- [ ] tabbar
+    - [x] elscreen
+    - [ ] tabbar
 

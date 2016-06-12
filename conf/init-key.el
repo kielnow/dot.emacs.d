@@ -41,7 +41,7 @@
 (my/package-install 'bind-key)
 (require 'bind-key)
 
-;; ヘルプ
+; ヘルプ
 ;;(bind-key "C-x h"	'help-command)
 (bind-key "M-h"		'help-command)
 (bind-key "<f1>"	'help-command)
@@ -59,16 +59,21 @@
 (bind-key "<f7>"	'eval-last-sexp)
 (bind-key "<C-f7>"	'eval-buffer)
 
+;; 行の折り返し
+(bind-key "C-c t" 'toggle-truncate-lines)
+
 ;; 行末の空白を削除
-(bind-key "<M-f8>" 'delete-trailing-whitespace)
+(bind-key "C-c d" 'delete-trailing-whitespqace)
+
+(bind-key "C-c w" 'whitespace-mode)
 
 ;; カーソルを移動せずにスクロール
 ;;(bind-key "M-n" (lambda () (interactive) (scroll-up 1)))
 ;;(bind-key "M-p" (lambda () (interactive) (scroll-down 1)))
 
-;;; -----------------------------------------------------------------------------
-;;; フォントサイズを変更
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; text-scale
+;;;-----------------------------------------------------------------------------
 (defun my/text-scale-0 () (interactive) (text-scale-set 0))
 (defun my/text-scale-1 () (interactive) (text-scale-set 1))
 (defun my/text-scale-2 () (interactive) (text-scale-set 2))
@@ -81,33 +86,34 @@
 (defun my/text-scale-9 () (interactive) (text-scale-set 9))
 
 (bind-keys
- ("C-+" . text-scale-increase)
- ("C--" . text-scale-decrease)
- ("<C-f1>" . my/text-scale-0)
- ("<C-f2>" . my/text-scale-1)
- ("<C-f3>" . my/text-scale-2)
- ("<C-f4>" . my/text-scale-3)
- ("<C-f5>" . my/text-scale-4)
- ("<C-f6>" . my/text-scale-5)
- ("<C-f7>" . my/text-scale-6)
- ("<C-f8>" . my/text-scale-7)
- ("<C-f9>" . my/text-scale-8)
+ ("C-+"          . text-scale-increase)
+ ("C--"          . text-scale-decrease)
+ ("C-c f 0"      . my/text-scale-0)
+ ("C-c f 1"      . my/text-scale-1)
+ ("C-c f 2"		 . my/text-scale-2)
+ ("C-c f 3"		 . my/text-scale-3)
+ ("C-c f 4"		 . my/text-scale-4)
+ ("C-c f 5"		 . my/text-scale-5)
+ ("C-c f 6"		 . my/text-scale-6)
+ ("C-c f 7"		 . my/text-scale-7)
+ ("C-c f 8"		 . my/text-scale-8)
+ ("C-c f 9"		 . my/text-scale-9)
  ("<C-kp-add>"   . text-scale-increase)
  ("<C-subtract>" . text-scale-decrease)
- ("<C-kp-0>" . my/text-scale-0)
- ("<C-kp-1>" . my/text-scale-1)
- ("<C-kp-2>" . my/text-scale-2)
- ("<C-kp-3>" . my/text-scale-3)
- ("<C-kp-4>" . my/text-scale-4)
- ("<C-kp-5>" . my/text-scale-5)
- ("<C-kp-6>" . my/text-scale-6)
- ("<C-kp-7>" . my/text-scale-7)
- ("<C-kp-8>" . my/text-scale-8)
- ("<C-kp-9>" . my/text-scale-9))
+ ("<C-kp-0>"     . my/text-scale-0)
+ ("<C-kp-1>"     . my/text-scale-1)
+ ("<C-kp-2>"     . my/text-scale-2)
+ ("<C-kp-3>"     . my/text-scale-3)
+ ("<C-kp-4>"     . my/text-scale-4)
+ ("<C-kp-5>"     . my/text-scale-5)
+ ("<C-kp-6>"     . my/text-scale-6)
+ ("<C-kp-7>"     . my/text-scale-7)
+ ("<C-kp-8>"     . my/text-scale-8)
+ ("<C-kp-9>"     . my/text-scale-9))
 
-;;; -----------------------------------------------------------------------------
-;;; ウィンドウの透明度を変更
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; frame-alpha
+;;;-----------------------------------------------------------------------------
 (defun my/frame-alpha ()
   (interactive)
   (let ((alpha (frame-parameter nil 'alpha)))
@@ -130,9 +136,9 @@
   (my/frame-alpha-increase (- dec)))
 
 (bind-keys
+ ("<C-f10>" . my/frame-alpha-set)
  ("<C-f11>" . my/frame-alpha-decrease)
- ("<C-f12>" . my/frame-alpha-increase)
- ("<C-f10>" . my/frame-alpha-set))
+ ("<C-f12>" . my/frame-alpha-increase))
 
 ;;;-----------------------------------------------------------------------------
 ;;; 右クリックメニュー
@@ -145,15 +151,25 @@
   (bind-key "<C-mouse-3>" 'mouse-popup-menubar))
 
 ;;;-----------------------------------------------------------------------------
+;;; other-window-or-split
+;;;-----------------------------------------------------------------------------
+(defun my/other-window-or-split ()
+  (interactive)
+  (when (one-window-p)
+    (split-window-vertically))
+  (other-window 1))
+(bind-key "C-o" 'my/other-window-or-split)
+
+;;;-----------------------------------------------------------------------------
 ;;; switch-to-minibuffer-window
 ;;;-----------------------------------------------------------------------------
-(defun switch-to-minibuffer-window ()
+(defun my/switch-to-minibuffer-window ()
   "switch to minibuffer window (if active)"
   (interactive)
   (when (active-minibuffer-window)
     (select-frame-set-input-focus (window-frame (active-minibuffer-window)))
     (select-window (active-minibuffer-window))))
-(bind-key "<f8>" 'switch-to-minibuffer-window)
+(bind-key "<C-tab>" 'my/switch-to-minibuffer-window)
 
 (require 'el-init)
 (el-init-provide)

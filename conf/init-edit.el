@@ -1,5 +1,4 @@
 (require 'init-prelude)
-(require 'bind-key)
 
 ;;;-----------------------------------------------------------------------------
 ;;; elscreen
@@ -11,13 +10,9 @@
   (set-variable 'elscreen-tab-display-kill-screen nil))
 
 ;;;-----------------------------------------------------------------------------
-;;; cua-mode
-;;;
-;;; C-RET     矩形編集
-;;; C-RET M-n 連番入力
+;;; cua-rectangle-mark-mode
 ;;;-----------------------------------------------------------------------------
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
+(bind-key "C-x SPC" 'cua-rectangle-mark-mode)
 
 ;;;-----------------------------------------------------------------------------
 ;;; expand-region
