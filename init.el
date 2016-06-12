@@ -86,7 +86,7 @@
 ;;;-----------------------------------------------------------------------------
 (when my/benchmark-p
   (my/package-install 'benchmark-init)
-  (require benchmark-init))
+  (require 'benchmark-init))
 
 ;;;-----------------------------------------------------------------------------
 ;;; el-init
