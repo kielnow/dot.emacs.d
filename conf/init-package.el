@@ -1,4 +1,4 @@
-;;;-----------------------------------------------------------------------------
+﻿;;;-----------------------------------------------------------------------------
 ;;; package
 ;;;-----------------------------------------------------------------------------
 (defvar my/packages
@@ -30,6 +30,7 @@
 	point-undo
 	fuzzy
 	company
+	readline-complete
 	;;auto-complete
 	;;ac-helm
 	helm
@@ -49,6 +50,7 @@
 	;;--------------------------------------------
 	;; window
 	;;--------------------------------------------
+	elscreen
 	popwin
 	e2wm
 	;;persp-mode
@@ -101,7 +103,10 @@
   (set-variable 'el-get-dir (expand-file-name "el-get/" my/package-dir))
   :config
   (my/add-to-load-path el-get-dir)
-  (use-package el-get-emacswiki))
+  (use-package el-get-emacswiki)
+  (unless (file-directory-p el-get-recipe-path-emacswiki)
+	(el-get-emacswiki-build-local-recipes))
+  (el-get 'sync my/el-get-packages))
 
 ;;;-----------------------------------------------------------------------------
 ;;; auto-install
