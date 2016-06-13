@@ -17,13 +17,9 @@
 ;; キーバインドを通知
 (setq suggest-key-bindings t)
 
-;; 画面分割時に Shift + 矢印キー でウィンドウを移動
-(windmove-default-keybindings)
-(setq windmove-wrap-around t)
-
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Mac OS X
-;;; -----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (when darwin-p
   ;; Command キーを meta に
   (setq ns-command-modifier 'meta)
@@ -149,27 +145,6 @@
 	(popup-menu menu-bar-edit-menu))
   (bind-key "<mouse-3>" 'my/mouse-edit-menu)
   (bind-key "<C-mouse-3>" 'mouse-popup-menubar))
-
-;;;-----------------------------------------------------------------------------
-;;; other-window-or-split
-;;;-----------------------------------------------------------------------------
-(defun my/other-window-or-split ()
-  (interactive)
-  (when (one-window-p)
-    (split-window-vertically))
-  (other-window 1))
-(bind-key "C-o" 'my/other-window-or-split)
-
-;;;-----------------------------------------------------------------------------
-;;; switch-to-minibuffer-window
-;;;-----------------------------------------------------------------------------
-(defun my/switch-to-minibuffer-window ()
-  "switch to minibuffer window (if active)"
-  (interactive)
-  (when (active-minibuffer-window)
-    (select-frame-set-input-focus (window-frame (active-minibuffer-window)))
-    (select-window (active-minibuffer-window))))
-(bind-key "<C-tab>" 'my/switch-to-minibuffer-window)
 
 (require 'el-init)
 (el-init-provide)

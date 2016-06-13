@@ -54,6 +54,8 @@
 	popwin
 	e2wm
 	;;persp-mode
+	;;window-number
+	window-numbering
 	owdriver
 	switch-window
 	hiwin

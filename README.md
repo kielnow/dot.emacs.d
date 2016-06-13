@@ -12,24 +12,31 @@
 ## Features
 
 - 編集系
-  - cua-rectangle-mark-mode
-  - expand-region
-  - multiple-cursors
+  - `cua-rectangle-mark-mode`
+  - `expand-region`
+  - `multiple-cursors`
   - 一括編集
-    - [x] color-moccur, moccur-edit
-    - [ ] occur
-    - [ ] all, all-ext
+    - [x] `color-moccur`, `moccur-edit`
+    - [ ] `occur`
+    - [ ] `all`, `all-ext`
 - 操作系
-  - helm
-  - redo+
-  - point-undo
-  - icomplete
+  - `icomplete`
+  - `helm`
+  - `redo+`
+  - `point-undo`
   - ポップアップ
-    - [x] company
-    - [ ] auto-complete
+    - [x] `company`
+    - [ ] `auto-complete`
 - ウィンドウ操作系
-  - iswitchb
+  - `iswitchb`
+  - ウィンドウ切り替え
+    - [x] `windmove`
+	- [ ] `window-number`
+	- [x] `window-numbering`
+    - [ ] `switch-window`
+    - [ ] `win-switch`
+    - [x] `owdriver`
   - タブ
-    - [x] elscreen
-    - [ ] tabbar
+    - [x] `elscreen`
+    - [ ] `tabbar`
 
