@@ -56,8 +56,9 @@
 	;;persp-mode
 	;;window-number
 	window-numbering
+	;;switch-window
+	;;win-switch
 	owdriver
-	switch-window
 	hiwin
 	;;recentf-ext
 	;;--------------------------------------------

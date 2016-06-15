@@ -27,6 +27,11 @@
 ;;; windmove
 ;;;-----------------------------------------------------------------------------
 (use-package windmove
+  :bind
+  (("M-J" . windmove-left)
+   ("M-L" . windmove-right)
+   ("M-I" . windmove-up)
+   ("M-K" . windmove-down))
   :config
   ;; Shift + 矢印キー でウィンドウ切り替え
   (windmove-default-keybindings)
