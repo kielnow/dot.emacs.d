@@ -17,38 +17,38 @@
 ;;(scroll-bar-mode 0)
 
 ;; 行番号をモードラインに表示
-(setq line-number-mode t)
+(line-number-mode 1)
 ;; 列番号をモードラインに表示
-(setq column-number-mode t)
+(column-number-mode 1)
 ;; ファイルサイズをモードラインに表示
-(setq size-indication-mode t)
+(size-indication-mode 1)
 ;; 現在の関数名をモードラインに表示
-;;(which-function-mode t)
+;;(which-function-mode 1)
 ;; 時間をモードラインに表示
 (setq display-time-string-forms '((format "%s/%s(%s)%s:%s" month day dayname 24-hours minutes)))
 (display-time)
 
 ;; 選択リージョンをハイライト
-(setq transient-mark-mode t)
+(transient-mark-mode 1)
 
 ;; 対応する括弧をハイライト
-(show-paren-mode t)
+(show-paren-mode 1)
 (setq show-paren-delay 0)
 (setq show-paren-style 'mixed)
 
 ;; linum-mode
-(global-linum-mode t)
+(global-linum-mode 1)
 (setq linum-format "%5d")
 
 ;; hl-line-mode
-(global-hl-line-mode t)
+(global-hl-line-mode 1)
 
 ;; 音を鳴らさない
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
 ;; ミニバッファの履歴を保存する
-(savehist-mode t)
+(savehist-mode 1)
 (setq history-length 3000)
 
 ;; カレントディレクトリ設定
@@ -59,7 +59,7 @@
 (setq delete-by-moving-to-trash t)
 
 ;; 変更があったファイルを自動再読み込み
-;;(global-auto-revert-mode t)
+;;(global-auto-revert-mode 1)
 ;; シンボリックリンクをたどる
 ;;(setq vc-follow-symlink t)
 
@@ -85,7 +85,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; icomplete
 ;;;-----------------------------------------------------------------------------
-(icomplete-mode t)
+(icomplete-mode 1)
 
 ;; 補完で大文字小文字を区別しない
 (setq completion-ignore-case t)
@@ -98,7 +98,7 @@
 ;;; iswitchb
 ;;;-----------------------------------------------------------------------------
 ;; バッファ切り替えでインクリメンタル補完を使う
-(iswitchb-mode t)
+(iswitchb-mode 1)
 (add-hook 'iswitchb-define-mode-map-hook
 		  (lambda ()
 			(define-key iswitchb-mode-map "\C-f" 'iswitchb-next-match)
@@ -125,7 +125,7 @@
 ;; kill-line で改行も切り取る
 ;;(setq kill-whole-line t)
 ;; リージョン選択時に文字を入力するとリージョンを削除する
-;;(delete-selection-mode t)
+;;(delete-selection-mode 1)
 
 ;; 区切り文字に全角スペースや・などを含める
 (setq paragraph-start '"^\\([ 　・■◆●□◇○<\t\n\f]\\|(?[0-9a-zA-Z]+)\\)")

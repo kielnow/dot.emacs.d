@@ -38,6 +38,20 @@
   (setq windmove-wrap-around t))
 
 ;;;-----------------------------------------------------------------------------
+;;; windresize
+;;;-----------------------------------------------------------------------------
+(use-package windresize
+  :bind
+  (("C-M-S-j" . windresize-left-force-left)
+   ("C-M-S-l" . windresize-right-force-left)
+   ("C-M-S-i" . windresize-up-force-up)
+   ("C-M-S-k" . windresize-down-force-up)
+   ("C-M-S-b" . windresize-balance-windows))
+  :config
+  (setq windresize-increment 4)
+  (set-variable 'windresize-move-borders t))
+
+;;;-----------------------------------------------------------------------------
 ;;; window-number
 ;;;-----------------------------------------------------------------------------
 ;;(use-package window-number

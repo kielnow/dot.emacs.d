@@ -49,7 +49,7 @@
 	(setq web-mode-code-indent-offset   2)
 	(setq indent-tabs-mode nil)
 	(setq tab-width 2)
-	(rainbow-mode t))
+	(rainbow-mode 1))
   (add-hook 'web-mode-hook 'my:web-mode-hook)
   ;; C-c C-n   (web-mode-navigate)
   ;; C-c C-e / (web-mode-element-close)
@@ -101,7 +101,7 @@
 ;;;-----------------------------------------------------------------------------
 (use-package twittering-mode
   :config
-  (setq twittering-icon-mode t))
+  (twittering-icon-mode 1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; persp-mode
