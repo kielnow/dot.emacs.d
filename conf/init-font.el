@@ -8,10 +8,10 @@
 		   '(katakana-jisx0201;半角カナ
 			 japanese-jisx0208;JIS基本漢字(第1-2水準漢字)
 			 japanese-jisx0212;JIS補助漢字 
-			 japanese-jisx0213-1;JIS拡張漢字(第3-4水準漢字)
-			 japanese-jisx0213-2
-			 japanese-jisx0213-a
-			 japanese-jisx0213.2004-1
+			 ;;japanese-jisx0213-1
+			 ;;japanese-jisx0213-2
+			 ;;japanese-jisx0213-a
+			 japanese-jisx0213.2004-1;JIS拡張漢字(第3-4水準漢字)
 			 ))
 		   (set-fontset-font nil charset font)))
 
