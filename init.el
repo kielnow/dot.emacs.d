@@ -108,8 +108,8 @@
   (benchmark-init/deactivate))
 
 (when my/user-emacs-editing-p
+  (cd user-emacs-directory)
   ;;(switch-to-buffer (get-buffer "*Messages*"))
-  ;;(cd user-emacs-directory)
   (benchmark-init/show-durations-tree)
   ;;(benchmark-init/show-durations-tabulated)
   (el-init-viewer))

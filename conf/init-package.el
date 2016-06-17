@@ -71,8 +71,9 @@
 	minimap
 	col-highlight
 	rainbow-mode
-	auto-highlight-symbol
+	rainbow-delimiters
 	highlight-symbol
+	auto-highlight-symbol
 	;;--------------------------------------------
 	;; language
 	;;--------------------------------------------

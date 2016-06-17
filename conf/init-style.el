@@ -4,7 +4,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; テーマ設定
 ;;;-----------------------------------------------------------------------------
-(when emacs24-p
+(when (>= emacs-major-version 24)
   (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes/"))
 
   ;; light
@@ -69,6 +69,19 @@
 		   ;;(line-spacing . 0)
 		   )
 		 default-frame-alist)))
+
+;;;-----------------------------------------------------------------------------
+;;; rainbow-delimiters-mode
+;;;-----------------------------------------------------------------------------
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  (require 'color)
+  (cl-loop for i from 1 to rainbow-delimiters-max-face-count
+		   do (let ((face (intern (format "rainbow-delimiters-depth-%d-face" i))))
+				(set-face-bold face t)
+				(cl-callf color-saturate-name (face-foreground face) 40))))
+'((((((((()))))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; highlight-symbol

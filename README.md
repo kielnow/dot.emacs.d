@@ -29,6 +29,7 @@
     - [ ] `auto-complete`
 - ウィンドウ操作系
   - `iswitchb`
+  - `windresize`
   - ウィンドウ切り替え
     - [x] `windmove`
 	- [ ] `window-number`
@@ -39,4 +40,11 @@
   - タブ
     - [x] `elscreen`
     - [ ] `tabbar`
-
+- スタイル
+  - `theme-looper`
+  - `nyan-mode`
+  - `rainbow-mode`
+  - `rainbow-delimiters`
+  - `highlight-symbol`
+  - `auto-highlight-symbol`
+  - `hiwin`
