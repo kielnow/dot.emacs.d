@@ -84,7 +84,8 @@
 	shader-mode
 	haskell-mode
 	tuareg
-	;;slime
+	slime
+	slime-company
 	web-mode
 	php-mode
 	;;--------------------------------------------

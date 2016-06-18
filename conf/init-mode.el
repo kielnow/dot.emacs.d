@@ -31,6 +31,18 @@
 (use-package hlsl-mode)
 
 ;;;-----------------------------------------------------------------------------
+;;; slime
+;;;-----------------------------------------------------------------------------
+(use-package slime
+  :init
+  (setq inferior-lisp-program "sbcl --noinform")
+  (when cygwin-p
+	(setq slime-to-lisp-filename-function 'cygwin-convert-file-name-to-windows)
+	(setq slime-from-lisp-filename-function 'cygwin-convert-file-name-from-windows))
+  :config
+  (slime-setup '(slime-fancy slime-company)))
+
+;;;-----------------------------------------------------------------------------
 ;;; web-mode
 ;;;-----------------------------------------------------------------------------
 (use-package web-mode
