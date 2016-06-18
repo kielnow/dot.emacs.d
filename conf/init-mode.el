@@ -40,7 +40,7 @@
 	(setq slime-to-lisp-filename-function 'cygwin-convert-file-name-to-windows)
 	(setq slime-from-lisp-filename-function 'cygwin-convert-file-name-from-windows))
   :config
-  (slime-setup '(slime-fancy slime-company)))
+  (slime-setup '(slime-fancy slime-company slime-banner)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; web-mode
