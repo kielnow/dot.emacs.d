@@ -19,6 +19,7 @@
 (use-package multiple-cursors
   :bind
   (("<C-M-return>" . mc/edit-lines)
+   ("C-. C-s" . mc/mark-all-in-region)
    ("C-. C-n" . mc/mark-next-like-this)
    ("C-. C-p" . mc/mark-previous-like-this)
    ("C-. *" . mc/mark-all-like-this))
@@ -194,6 +195,12 @@
   :bind
   (("M-[" . point-undo)
    ("M-]" . point-redo)))
+
+;;;-----------------------------------------------------------------------------
+;;; sudo-edit
+;;;-----------------------------------------------------------------------------
+(use-package sudo-edit
+  :ensure t)
 
 ;;;
 ;;; .emacs.dを散らかさない保存ファイルの場所を変更する設定まとめ

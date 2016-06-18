@@ -100,6 +100,7 @@
 ;;; twittering-mode
 ;;;-----------------------------------------------------------------------------
 (use-package twittering-mode
+  :defer t
   :config
   (twittering-icon-mode 1))
 

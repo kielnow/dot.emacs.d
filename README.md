@@ -48,3 +48,5 @@
   - `highlight-symbol`
   - `auto-highlight-symbol`
   - `hiwin`
+- その他
+  - `sudo-edit`
