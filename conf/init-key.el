@@ -31,6 +31,11 @@
   (setq mac-pass-option-to-system t)
   (global-set-key [ns-drag-file] 'ns-find-file))
 
+;;;
+;;; Emacs: How to Define Super Hyper Keys
+;;; http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
+;;;
+
 ;;;-----------------------------------------------------------------------------
 ;;; bind-key
 ;;;-----------------------------------------------------------------------------
