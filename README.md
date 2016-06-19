@@ -23,7 +23,7 @@
   - `icomplete`
   - `helm`
   - `redo+`
-  - `point-undo`
+  - [ ] `point-undo`
   - ポップアップ
     - [x] `company`
     - [ ] `auto-complete`

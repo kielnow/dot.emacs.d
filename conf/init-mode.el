@@ -55,14 +55,14 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (defun my:web-mode-hook ()
+  (defun my/web-mode-hook ()
 	(setq web-mode-markup-indent-offset 2)
 	(setq web-mode-css-indent-offset    2)
 	(setq web-mode-code-indent-offset   2)
 	(setq indent-tabs-mode nil)
 	(setq tab-width 2)
 	(rainbow-mode 1))
-  (add-hook 'web-mode-hook 'my:web-mode-hook)
+  (add-hook 'web-mode-hook 'my/web-mode-hook)
   ;; C-c C-n   (web-mode-navigate)
   ;; C-c C-e / (web-mode-element-close)
   ;; C-c C-e s (web-mode-block-select)
@@ -72,10 +72,10 @@
 ;;; js-mode
 ;;;-----------------------------------------------------------------------------
 (setq js-indent-level 2)
-(defun my:js-mode-hook ()
+(defun my/js-mode-hook ()
   (setq indent-tabs-mode nil)
   (setq tab-width 2))
-(add-hook 'js-mode-hook 'my:js-mode-hook)
+(add-hook 'js-mode-hook 'my/js-mode-hook)
 
 ;;;-----------------------------------------------------------------------------
 ;;; php-mode
