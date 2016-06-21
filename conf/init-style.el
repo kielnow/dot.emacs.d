@@ -74,7 +74,7 @@
 ;;; rainbow-delimiters-mode
 ;;;-----------------------------------------------------------------------------
 (use-package rainbow-delimiters
-  :defer t
+  :commands (rainbow-delimiters-mode)
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   (require 'color)
@@ -88,13 +88,10 @@
 ;;; highlight-symbol
 ;;;-----------------------------------------------------------------------------
 (use-package auto-highlight-symbol
-  :defer t
   :config
-  (set-variable 'ahs-idle-interval 0.2)
   ;;(global-auto-highlight-symbol-mode 1)
-  )
+  (set-variable 'ahs-idle-interval 0.2))
 (use-package highlight-symbol
-  :defer t
   :bind
   (("C-c h" . highlight-symbol)))
 

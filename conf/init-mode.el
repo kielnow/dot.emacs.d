@@ -34,12 +34,13 @@
 ;;; slime
 ;;;-----------------------------------------------------------------------------
 (use-package slime
-  :defer t
+  :commands (slime)
   :init
-  (setq inferior-lisp-program "sbcl --noinform")
-  (when cygwin-p
-	(setq slime-to-lisp-filename-function 'cygwin-convert-file-name-to-windows)
-	(setq slime-from-lisp-filename-function 'cygwin-convert-file-name-from-windows))
+  (progn
+	(setq inferior-lisp-program "sbcl --noinform")
+	(when cygwin-p
+	  (setq slime-to-lisp-filename-function 'cygwin-convert-file-name-to-windows)
+	  (setq slime-from-lisp-filename-function 'cygwin-convert-file-name-from-windows)))
   :config
   (slime-setup '(slime-fancy slime-company slime-banner)))
 
@@ -47,7 +48,7 @@
 ;;; web-mode
 ;;;-----------------------------------------------------------------------------
 (use-package web-mode
-  :defer t
+  :commands (web-mode)
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\(\\.php\\)?\\'" . web-mode))
