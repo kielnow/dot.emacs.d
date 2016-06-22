@@ -50,9 +50,9 @@
 ;;; twittering-mode
 ;;;-----------------------------------------------------------------------------
 (use-package twittering-mode
-  :commands (twit)
   :config
   (twittering-icon-mode 1))
 
 (require 'el-init)
 (el-init-provide)
+
