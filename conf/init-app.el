@@ -50,6 +50,7 @@
 ;;; twittering-mode
 ;;;-----------------------------------------------------------------------------
 (use-package twittering-mode
+  :commands (twittering-mode)
   :config
   (twittering-icon-mode 1))
 

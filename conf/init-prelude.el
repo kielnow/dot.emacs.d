@@ -55,10 +55,10 @@
 ;;;
 ;;; 手動でバイトコンパイルする場合 C-u 0 M-x byte-recomile-directory ディレクトリ名 RET
 ;;;-----------------------------------------------------------------------------
-(unless (fboundp 'byte-recompile-file)
-  (defun byte-recompile-file (filename)
-	(if (file-newer-than-file-p filename (concat filename "c"))
-		(byte-compile-file filename) t)))
+(defun my/byte-recompile-file (filename)
+  (interactive "fByte recompile file: ")
+  (if (file-newer-than-file-p filename (concat filename "c"))
+	  (byte-compile-file filename) t))
 
 (defun my/byte-recompile-directory (directory)
   (if (file-directory-p directory)
@@ -67,12 +67,12 @@
 (defun byte-recompile-init-files ()
   "Recompile all the init files."
   (interactive)
-  (byte-recompile-file user-init-file)
+  (my/byte-recompile-file user-init-file)
   (my/byte-recompile-directory my/init-dir)
   (my/byte-recompile-directory my/lisp-dir)
   t)
 
-(unless my/user-emacs-editing-p
+(unless nil;;my/user-emacs-editing-p
   (add-hook 'kill-emacs-query-functions 'byte-recompile-init-files))
 
 ;; 再初期化
