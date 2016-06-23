@@ -82,6 +82,7 @@
 	markdown-mode
 	glsl-mode
 	shader-mode
+	go-mode
 	haskell-mode
 	tuareg
 	slime
