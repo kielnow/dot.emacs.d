@@ -47,6 +47,9 @@
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
+;; 同じ内容を履歴に記録しない
+(set-variable 'history-delete-duplicates t)
+
 ;; ミニバッファの履歴を保存する
 (savehist-mode 1)
 (setq history-length 3000)
