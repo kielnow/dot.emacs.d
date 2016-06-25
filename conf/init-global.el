@@ -52,7 +52,10 @@
 
 ;; ミニバッファの履歴を保存する
 (savehist-mode 1)
-(setq history-length 3000)
+(set-variable 'history-length 3000)
+
+;; ログの記録行数を増やす
+(set-variable 'message-log-max 10000)
 
 ;; カレントディレクトリ設定
 ;;(cd "~")
