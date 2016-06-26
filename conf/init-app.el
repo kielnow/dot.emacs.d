@@ -4,7 +4,7 @@
 ;;; eww
 ;;;-----------------------------------------------------------------------------
 (use-package eww
-  :commands (eww)
+  ;;:commands (eww)
   :init
   (progn
 	(defvar eww-disable-colorize t)
