@@ -4,7 +4,7 @@
 ;;; eww
 ;;;-----------------------------------------------------------------------------
 (use-package eww
-  ;;:commands (eww)
+  :commands (eww)
   :init
   (progn
 	(defvar eww-disable-colorize t)
@@ -37,9 +37,8 @@
 	;;(add-hook 'eww-mode-hook 'eww-mode-hook--disable-image)
 	)
   :config
-  (progn
-	(set-variable 'eww-search-prefix "http://www.google.co.jp/search?q=")
-	(add-hook 'eww-mode-hook 'auto-highlight-symbol-mode)))
+  (set-variable 'eww-search-prefix "http://www.google.co.jp/search?q=")
+  (add-hook 'eww-mode-hook 'auto-highlight-symbol-mode))
 
 ;;;
 ;;; Emacs 使用中に素早く検索する
@@ -49,8 +48,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; twittering-mode
 ;;;-----------------------------------------------------------------------------
-(use-package twittering-mode
-  :commands (twittering-mode)
+(use-package twit
+  :commands (twit)
   :config
   (twittering-icon-mode 1))
 
