@@ -14,6 +14,20 @@
    ("C-M-@" . er/contract-region)))
 
 ;;;-----------------------------------------------------------------------------
+;;; hippie-exp
+;;;-----------------------------------------------------------------------------
+(use-package hippie-exp
+  :bind
+  (("M-/" . hippie-expand))
+  :config
+  (set-variable 'hippie-expand-try-functions-list
+				'(try-complete-file-name-partially
+				  try-complete-file-name
+				  try-expand-dabbrev
+				  try-expand-dabbrev-all-buffers
+				  try-expand-dabbrev-from-kill)))
+
+;;;-----------------------------------------------------------------------------
 ;;; multiple-cursors
 ;;;-----------------------------------------------------------------------------
 (use-package multiple-cursors
