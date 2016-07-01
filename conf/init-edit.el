@@ -232,5 +232,13 @@
 ;;; http://qiita.com/ShingoFukuyama/items/19b02cd1679a6ea0bfdb
 ;;;
 
+;;;-----------------------------------------------------------------------------
+;;; recentf-ext
+;;;-----------------------------------------------------------------------------
+(use-package recentf
+  :config
+  (set-variable 'recentf-max-saved-items 500)
+  (set-variable 'recentf-save-file (expand-file-name "recentf" my/temp-dir)))
+
 (require 'el-init)
 (el-init-provide)

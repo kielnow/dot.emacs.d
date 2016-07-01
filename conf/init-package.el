@@ -41,7 +41,7 @@
 	vlf
 	savekill
 	keyfreq
-	;;recentf-ext
+	recentf-ext
 	sudo-edit
 	;;--------------------------------------------
 	;; eldoc
