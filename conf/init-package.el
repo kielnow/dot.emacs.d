@@ -28,6 +28,7 @@
 	undohist
 	undo-tree
 	point-undo
+	goto-chg
 	fuzzy
 	company
 	readline-complete
