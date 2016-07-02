@@ -15,6 +15,7 @@
   - `cua-rectangle-mark-mode`
   - `expand-region`
   - `multiple-cursors`
+  - `wgrep`
   - 一括編集
     - [x] `color-moccur`, `moccur-edit`
     - [ ] `occur`
@@ -23,11 +24,14 @@
   - `icomplete`
   - `helm`
   - `redo+`
+  - [ ] `undo-tree`
   - [ ] `point-undo`
+  - `goto-chg`
   - ポップアップ
     - [x] `company`
     - [ ] `auto-complete`
 - ウィンドウ操作系
+  - `popwin`
   - `iswitchb`
   - `windresize`
   - ウィンドウ切り替え
