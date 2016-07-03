@@ -16,6 +16,7 @@
   - `expand-region`
   - `multiple-cursors`
   - `wgrep`
+  - `migemo`
   - 一括編集
     - [x] `color-moccur`, `moccur-edit`
     - [ ] `occur`
@@ -54,3 +55,5 @@
   - `hiwin`
 - その他
   - `sudo-edit`
+  - `w3m`
+  - `twittering-mode`
