@@ -162,8 +162,26 @@
    ("C-M-s"   . helm-occur)
    ("M-x"     . helm-M-x)
    ("M-y"     . helm-show-kill-ring)
+   ("C-x c b" . helm-resume)
    :map isearch-mode-map
    ("C-o"     . helm-occur-from-isearch)))
+
+;;;-----------------------------------------------------------------------------
+;;; helm-migemo
+;;;-----------------------------------------------------------------------------
+(use-package helm-migemo)
+
+;;;-----------------------------------------------------------------------------
+;;; helm-swoop
+;;;-----------------------------------------------------------------------------
+(use-package helm-swoop
+  :bind
+  (:map helm-swoop-map
+   ("C-s" . helm-next-line)
+   ("C-r" . helm-previous-line))
+  :config
+  ;;(set-variable 'helm-swoop-move-to-line-cycle nil)
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; popwin

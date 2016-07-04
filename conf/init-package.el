@@ -37,6 +37,9 @@
 	helm
 	helm-company
 	helm-c-moccur
+	helm-swoop
+	helm-migemo
+	ace-isearch
 	all-ext
 	vlf
 	savekill
