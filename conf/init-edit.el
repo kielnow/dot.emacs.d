@@ -175,11 +175,10 @@
 ;;; helm-swoop
 ;;;-----------------------------------------------------------------------------
 (use-package helm-swoop
-  :bind
-  (:map helm-swoop-map
-   ("C-s" . helm-next-line)
-   ("C-r" . helm-previous-line))
   :config
+  (bind-keys :map helm-swoop-map
+			 ("C-s" . helm-next-line)
+			 ("C-r" . helm-previous-line))
   ;;(set-variable 'helm-swoop-move-to-line-cycle nil)
   )
 
