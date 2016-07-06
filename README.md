@@ -24,6 +24,8 @@
 - 操作系
   - `icomplete`
   - `helm`
+  - `helm-swoop`
+  - `helm-migemo`
   - `redo+`
   - [ ] `undo-tree`
   - [ ] `point-undo`
