@@ -23,9 +23,12 @@
     - [ ] `all`, `all-ext`
 - 操作系
   - `icomplete`
+  - `readline-complete`
   - `helm`
   - `helm-swoop`
   - `helm-migemo`
+  - `helm-company`
+  - `helm-c-moccur`
   - `redo+`
   - [ ] `undo-tree`
   - [ ] `point-undo`
