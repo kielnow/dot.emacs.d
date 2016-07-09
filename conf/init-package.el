@@ -39,6 +39,7 @@
 	helm-c-moccur
 	helm-swoop
 	helm-migemo
+	ace-jump-mode
 	ace-isearch
 	all-ext
 	vlf
