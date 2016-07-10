@@ -31,6 +31,13 @@
   (setq mac-pass-option-to-system t)
   (global-set-key [ns-drag-file] 'ns-find-file))
 
+;;;-----------------------------------------------------------------------------
+;;; Windows
+;;;-----------------------------------------------------------------------------
+(when windows-p
+  (setq w32-pass-lwindows-to-system nil)
+  (setq w32-lwindows-modifier 'hyper))
+
 ;;;
 ;;; Emacs: How to Define Super Hyper Keys
 ;;; http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
@@ -150,6 +157,24 @@
 	(popup-menu menu-bar-edit-menu))
   (bind-key "<mouse-3>" 'my/mouse-edit-menu)
   (bind-key "<C-mouse-3>" 'mouse-popup-menubar))
+
+;;;-----------------------------------------------------------------------------
+;;; ace-jump-mode
+;;;-----------------------------------------------------------------------------
+(use-package ace-jump-mode
+  :config
+  (defun add-keys-to-ace-jump-mode (prefix c &optional mode)
+	(define-key global-map
+	  (read-kbd-macro (concat prefix (string c)))
+	  `(lambda ()
+		 (interactive)
+		 (funcall (if (eq ',mode 'word)
+					  #'ace-jump-word-mode
+					#'ace-jump-char-mode) ,c))))
+  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "C-c C-c " c))
+  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "C-c C-c " c))
+  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "C-c c " c 'word))
+  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "C-c c " c 'word)))
 
 (require 'el-init)
 (el-init-provide)
