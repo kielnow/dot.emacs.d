@@ -163,18 +163,17 @@
 ;;;-----------------------------------------------------------------------------
 (use-package ace-jump-mode
   :config
-  (defun add-keys-to-ace-jump-mode (prefix c &optional mode)
-	(define-key global-map
-	  (read-kbd-macro (concat prefix (string c)))
-	  `(lambda ()
-		 (interactive)
-		 (funcall (if (eq ',mode 'word)
-					  #'ace-jump-word-mode
-					#'ace-jump-char-mode) ,c))))
-  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "C-c C-c " c))
-  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "C-c C-c " c))
-  (loop for c from ?0 to ?9 do (add-keys-to-ace-jump-mode "C-c c " c 'word))
-  (loop for c from ?a to ?z do (add-keys-to-ace-jump-mode "C-c c " c 'word)))
+  (defvar non-convert-map (make-keymap))
+  (define-key global-map (kbd "<non-convert>") non-convert-map)
+  (defun my/-define-key-to-ace-jump-mode (prefix c &optional keymap word-p)
+	(define-key keymap (kbd (concat prefix (string c)))
+	  `(lambda () (interactive) (,(if word-p 'ace-jump-word-mode 'ace-jump-char-mode) ,c))))
+  (loop for c from ?0 to ?9 do (my/-define-key-to-ace-jump-mode ""   c non-convert-map))
+  (loop for c from ?a to ?z do (my/-define-key-to-ace-jump-mode ""   c non-convert-map))
+  (loop for c from ?! to ?~ do (my/-define-key-to-ace-jump-mode ""   c non-convert-map))
+  (loop for c from ?0 to ?9 do (my/-define-key-to-ace-jump-mode "M-" c non-convert-map t))
+  (loop for c from ?a to ?z do (my/-define-key-to-ace-jump-mode "M-" c non-convert-map t))
+  (loop for c from ?! to ?~ do (my/-define-key-to-ace-jump-mode "M-" c non-convert-map t)))
 
 (require 'el-init)
 (el-init-provide)
