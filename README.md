@@ -29,6 +29,8 @@
   - `helm-migemo`
   - `helm-company`
   - `helm-c-moccur`
+  - `ace-jump-mode`
+  - `ace-isearch`
   - `redo+`
   - [ ] `undo-tree`
   - [ ] `point-undo`
