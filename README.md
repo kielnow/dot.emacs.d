@@ -31,6 +31,7 @@
   - `helm-c-moccur`
   - `ace-jump-mode`
   - `ace-isearch`
+  - [ ] `avy`
   - `redo+`
   - [ ] `undo-tree`
   - [ ] `point-undo`
@@ -48,6 +49,7 @@
 	- [x] `window-numbering`
     - [ ] `switch-window`
     - [ ] `win-switch`
+	- [ ] `ace-window`
     - [x] `owdriver`
   - タブ
     - [x] `elscreen`
