@@ -63,6 +63,7 @@
 	;;persp-mode
 	;;window-number
 	window-numbering
+	;;ace-window
 	;;switch-window
 	;;win-switch
 	owdriver
