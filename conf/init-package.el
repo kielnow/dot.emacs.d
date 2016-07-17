@@ -64,6 +64,7 @@
 	;;window-number
 	window-numbering
 	ace-window
+	;;avy
 	;;switch-window
 	;;win-switch
 	owdriver
