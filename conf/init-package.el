@@ -41,6 +41,9 @@
 	helm-migemo
 	ace-jump-mode
 	ace-isearch
+	;;ace-window
+	;;avy
+	;;avy-migemo
 	all-ext
 	vlf
 	savekill
@@ -63,8 +66,6 @@
 	;;persp-mode
 	;;window-number
 	window-numbering
-	;;ace-window
-	;;avy
 	;;switch-window
 	;;win-switch
 	owdriver
