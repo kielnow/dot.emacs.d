@@ -32,6 +32,7 @@
   - `ace-jump-mode`
   - `ace-isearch`
   - [ ] `avy`
+  - [ ] `avy-migemo`
   - `redo+`
   - [ ] `undo-tree`
   - [ ] `point-undo`
