@@ -20,9 +20,9 @@
 (defconst my/temp-dir    (locate-user-emacs-file "tmp/"))
 
 ;; ベンチマークを取るかどうか
-(defconst my/benchmark-p t)
+(defconst my/benchmark-p nil)
 ;; .emacs.d 編集用
-(defconst my/user-emacs-editing-p t)
+(defconst my/user-emacs-editing-p nil)
 ;; 実験用
 (defconst my/experimental-p t)
 

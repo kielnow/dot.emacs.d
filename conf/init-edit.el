@@ -257,7 +257,7 @@
   (set-variable 'recentf-max-saved-items 500)
   (set-variable 'recentf-save-file (expand-file-name "recentf" my/temp-dir)))
 
-(use-package recentf-ext)
+;;(use-package recentf-ext)
 
 (require 'el-init)
 (el-init-provide)

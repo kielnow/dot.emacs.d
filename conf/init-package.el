@@ -37,7 +37,7 @@
 	helm
 	helm-company
 	helm-c-moccur
-	helm-swoop
+	;;helm-swoop
 	helm-migemo
 	ace-jump-mode
 	ace-isearch
@@ -140,7 +140,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; others
 ;;;-----------------------------------------------------------------------------
-(require 'naruto)
+;;(require 'naruto)
 
 (require 'el-init)
 (el-init-provide)
