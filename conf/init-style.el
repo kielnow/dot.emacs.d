@@ -17,7 +17,7 @@
   ;;(load-theme 'whiteboard t)
 
   ;; dark
-  (load-theme 'deeper-blue t)
+  ;;(load-theme 'deeper-blue t)
   ;;(load-theme 'misterioso t)
   ;;(load-theme 'tango-dark t)
   ;;(load-theme 'tsdh-dark t)
@@ -25,7 +25,7 @@
 
   ;; black
   ;;(load-theme 'manoj-dark t)
-  ;;(load-theme 'wheatgrass t)
+  (load-theme 'wheatgrass t)
   ;;(load-theme 'molokai t)
 
   ;; blue
@@ -60,7 +60,7 @@
 		   (height . ,height);(height .  62)
 		   (left   . ,left)
 		   (top    . ,top)
-		   (alpha  . 90)
+		   (alpha  . 95)
 		   (cursor-type . box)
 		   ;;(menu-bar-lines . 1)
 		   ;;(tool-bar-lines . 0)

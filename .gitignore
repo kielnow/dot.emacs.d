@@ -5,3 +5,5 @@ auto-save-list/
 tmp/
 etc/
 packages/
+el-get/
+history

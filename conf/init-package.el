@@ -20,6 +20,8 @@
 	;;--------------------------------------------
 	;; edit
 	;;--------------------------------------------
+	;;dired-icon
+	all-the-icons-dired
 	expand-region
 	multiple-cursors
 	color-moccur

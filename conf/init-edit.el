@@ -50,14 +50,14 @@
 ;;;-----------------------------------------------------------------------------
 ;;; company
 ;;;-----------------------------------------------------------------------------
-(use-package company
-  :config
-  (global-company-mode)
-  (custom-set-variables
-   '(company-idle-delay 0)
-   '(company-minimum-prefix-length 2)
-   '(company-selection-wrap-around t))
-  (use-package readline-complete))
+;;(use-package company
+;;  :config
+;;  (global-company-mode)
+;;  (custom-set-variables
+;;   '(company-idle-delay 0)
+;;   '(company-minimum-prefix-length 2)
+;;   '(company-selection-wrap-around t))
+;;  (use-package readline-complete))
 
 ;;;-----------------------------------------------------------------------------
 ;;; auto-complete
@@ -164,7 +164,21 @@
    ("M-y"     . helm-show-kill-ring)
    ("C-x c b" . helm-resume)
    :map isearch-mode-map
-   ("C-o"     . helm-occur-from-isearch)))
+   ("C-o"     . helm-occur-from-isearch))
+;;  :config
+;;  (defadvice helm-mode (around avoid-read-file-name activate)
+;;	(let ((read-file-name-function read-file-name-function)
+;;		  (completing-read-function completing-read-function))
+;;	  ad-do-it))
+;;  (setq completing-read-function 'my-helm-completing-read-default)
+;;  (defun my-helm-completing-read-default (&rest _)
+;;	(apply (cond ;; [2014-08-11 Mon]helm版のread-file-nameは重いからいらない
+;;			((eq (nth 1 _) 'read-file-name-internal)
+;;			 'completing-read-default)
+;;			(t
+;;			 'helm--completing-read-default))
+;;		   _))
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-migemo
@@ -258,6 +272,20 @@
   (set-variable 'recentf-save-file (expand-file-name "recentf" my/temp-dir)))
 
 ;;(use-package recentf-ext)
+
+;;;-----------------------------------------------------------------------------
+;;; dired-icon
+;;;-----------------------------------------------------------------------------
+;;(use-package dired-icon
+;;  :config
+;;  (add-hook 'dired-mode-hook 'dired-icon-mode))
+
+;;;-----------------------------------------------------------------------------
+;;; all-the-icons-dired
+;;;-----------------------------------------------------------------------------
+(use-package all-the-icons-dired
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (require 'el-init)
 (el-init-provide)
